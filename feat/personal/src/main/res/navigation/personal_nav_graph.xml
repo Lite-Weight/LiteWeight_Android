@@ -6,7 +6,7 @@
     app:startDestination="@id/personalFragment">
     <fragment
         android:id="@+id/personalFragment"
-        android:name="com.konkuk.personal.PersonalFragment"
+        android:name="com.konkuk.personal.ui.personal.PersonalFragment"
         android:label="fragment_personal"
         tools:layout="@layout/fragment_personal" />
 </navigation>

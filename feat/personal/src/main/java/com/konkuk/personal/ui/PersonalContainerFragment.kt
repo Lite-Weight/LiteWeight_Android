@@ -1,4 +1,4 @@
-package com.konkuk.personal
+package com.konkuk.personal.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.konkuk.personal.databinding.FragmentPersonalContainerBinding
 
-class PersonalContainerFragment : Fragment() {
+internal class PersonalContainerFragment : Fragment() {
     private var _binding: FragmentPersonalContainerBinding? = null
     private val binding get() = _binding!!
 
@@ -15,7 +15,7 @@ class PersonalContainerFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentPersonalContainerBinding.inflate(inflater, container, false)
         return binding.root
     }

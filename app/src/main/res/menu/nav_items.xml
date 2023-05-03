@@ -10,6 +10,10 @@
         app:showAsAction="ifRoom"/>
 
     <item
+        android:id="@+id/placeholder"
+        android:title="" />
+
+    <item
         android:id="@id/history_nav_graph"
         android:icon="@drawable/ic_launcher_background"
         android:title="@string/history_nav_title"
