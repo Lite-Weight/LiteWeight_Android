@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -57,4 +59,12 @@ dependencies {
     // Navigation
     implementation(AndroidX.NAVIGATION_FRAGMENT_KTX)
     implementation(AndroidX.NAVIGATION_UI_KTX)
+
+    // DI
+    implementation(DI.HILT)
+    kapt(DI.HILT_COMPLIER)
+}
+
+kapt {
+    correctErrorTypes = true
 }

@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -52,7 +54,16 @@ dependencies {
     // Navigation
     implementation(AndroidX.NAVIGATION_FRAGMENT_KTX)
     implementation(AndroidX.NAVIGATION_UI_KTX)
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+
+    // Lifecycle (by viewModels())
+    implementation(AndroidX.LIFECYCLE_VIEWMODEL)
+    implementation(AndroidX.LIFECYCLE_LIVEDATA)
+
+    // DI
+    implementation(DI.HILT)
+    kapt(DI.HILT_COMPLIER)
+}
+
+kapt {
+    correctErrorTypes = true
 }
