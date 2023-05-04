@@ -6,7 +6,7 @@
     app:startDestination="@id/historyFragment">
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.konkuk.history.HistoryFragment"
+        android:name="com.konkuk.history.ui.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
 </navigation>
