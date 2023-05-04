@@ -23,9 +23,14 @@ class PersonalViewModel @Inject constructor(
 
     private fun collectCalories() {
         viewModelScope.launch {
-            getCaloriesUseCase().collect { calories ->
+            getCaloriesUseCase().onSuccess { value ->
+                value.collect { calories ->
+                    _uiState.value =
+                        _uiState.value.copy(caloriesUiState = CaloriesUiState.InProgress(calories))
+                }
+            }.onFailure {
                 _uiState.value =
-                    _uiState.value.copy(caloriesUiState = CaloriesUiState.InProgress(calories))
+                    _uiState.value.copy(caloriesUiState = CaloriesUiState.Error(it.message.toString()))
             }
         }
     }

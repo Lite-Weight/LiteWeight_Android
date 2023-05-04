@@ -1,4 +1,4 @@
-package com.konkuk.history
+package com.konkuk.history.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
