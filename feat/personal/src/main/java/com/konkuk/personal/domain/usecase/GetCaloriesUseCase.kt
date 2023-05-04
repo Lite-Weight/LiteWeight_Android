@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetCaloriesUseCase @Inject constructor(
     private val personalRepository: PersonalRepository,
 ) {
-    operator fun invoke(): Flow<Int> {
+    operator fun invoke(): Result<Flow<Int>> {
         return personalRepository.getCalories()
     }
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class PersonalRepositoryImp @Inject constructor(
     private val personalDataSource: PersonalDataSource,
 ) : PersonalRepository {
-    override fun getCalories(): Flow<Int> {
+    override fun getCalories(): Result<Flow<Int>> {
         return personalDataSource.getCalories()
     }
 }

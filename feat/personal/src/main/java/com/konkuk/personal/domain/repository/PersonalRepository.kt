@@ -3,5 +3,5 @@ package com.konkuk.personal.domain.repository
 import kotlinx.coroutines.flow.Flow
 
 interface PersonalRepository {
-    fun getCalories(): Flow<Int>
+    fun getCalories(): Result<Flow<Int>>
 }
