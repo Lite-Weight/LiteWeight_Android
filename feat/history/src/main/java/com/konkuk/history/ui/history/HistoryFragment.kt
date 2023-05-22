@@ -29,10 +29,16 @@ class HistoryFragment : Fragment() {
     ): View {
         _binding = FragmentHistoryBinding.inflate(layoutInflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.lifecycleOwner = viewLifecycleOwner
+
         initViews()
         observeUiState()
-
-        return binding.root
     }
 
     private fun initViews() = with(binding) {
