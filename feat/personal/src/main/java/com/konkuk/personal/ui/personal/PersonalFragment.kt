@@ -27,9 +27,15 @@ class PersonalFragment : Fragment() {
     ): View {
         _binding = FragmentPersonalBinding.inflate(inflater, container, false)
 
-        observeUiState()
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        observeUiState()
     }
 
     private fun observeUiState() {

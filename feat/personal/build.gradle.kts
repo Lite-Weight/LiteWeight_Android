@@ -33,7 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = Versions.JVM_TARGET
     }
-    viewBinding {
+    dataBinding {
         enable = true
     }
 }
