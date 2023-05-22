@@ -1,14 +1,21 @@
-package com.konkuk.liteweight
+package com.konkuk.liteweight.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import com.konkuk.capture.ui.enroll.EnrollBottomSheetDialogFragment
+import com.konkuk.liteweight.R
 import com.konkuk.liteweight.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -16,12 +23,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    private val viewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.lifecycleOwner = this
+        binding.vm = viewModel
+
+        initViews()
+        observeEvent()
+    }
+
+    private fun initViews() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -30,14 +47,44 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.parent?.id) {
-                com.konkuk.personal.R.id.personal_nav_graph -> binding.toolbar.title = getString(R.string.personal_nav_title)
-                com.konkuk.history.R.id.history_nav_graph -> binding.toolbar.title = getString(R.string.history_nav_title)
+                com.konkuk.personal.R.id.personal_nav_graph ->
+                    binding.toolbar.title =
+                        getString(R.string.personal_nav_title)
+                com.konkuk.history.R.id.history_nav_graph ->
+                    binding.toolbar.title =
+                        getString(R.string.history_nav_title)
             }
         }
 
         appBarConfiguration = AppBarConfiguration(navController.graph)
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         binding.bottomNavigationView.setupWithNavController(navController)
+    }
+
+    private fun observeEvent() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.event.collect { event ->
+                    handleEvent(event)
+                }
+            }
+        }
+    }
+
+    private fun handleEvent(event: Event) {
+        when (event) {
+            Event.CaptureClickEvent -> {
+                navigateCaptureDialog()
+            }
+        }
+    }
+
+    private fun navigateCaptureDialog() {
+        val bottomSheetDialogFragment = EnrollBottomSheetDialogFragment()
+        bottomSheetDialogFragment.show(
+            supportFragmentManager,
+            bottomSheetDialogFragment.tag,
+        )
     }
 
     override fun onSupportNavigateUp(): Boolean {
