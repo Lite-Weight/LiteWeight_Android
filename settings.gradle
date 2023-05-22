@@ -16,3 +16,4 @@ rootProject.name = "LiteWeight_Android"
 include ':app'
 include ':feat:personal'
 include ':feat:history'
+include ':feat:capture'
