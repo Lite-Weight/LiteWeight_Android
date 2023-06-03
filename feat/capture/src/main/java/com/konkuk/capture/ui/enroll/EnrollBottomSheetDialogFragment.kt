@@ -25,6 +25,28 @@ class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.lifecycleOwner = viewLifecycleOwner
+
+
+        initSelector()
+
+
+
+    }
+
+    private fun initSelector() {
+        //카메라 혹은 펜 둘중 하나 선택 하는 버튼(카메라가 기본 선택)
+        binding.apply {
+            selectorCamera.isSelected = true
+            selectorPen.isSelected = false
+            selectorCamera.setOnClickListener {
+                selectorCamera.isSelected = true
+                selectorPen.isSelected = false
+            }
+            selectorPen.setOnClickListener {
+                selectorCamera.isSelected = false
+                selectorPen.isSelected = true
+            }
+        }
     }
 
     override fun onDestroy() {

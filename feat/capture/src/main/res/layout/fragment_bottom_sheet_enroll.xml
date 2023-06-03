@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:background="@color/back_white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/back_white"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingHorizontal="55dp">
@@ -17,10 +17,10 @@
             android:src="@drawable/rectanglesmall4x" />
 
         <TextView
-            android:layout_gravity="center"
             android:id="@+id/bottomSheetTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:text="등록 방법을 선택해 주세요"
             android:textColor="@android:color/black"
@@ -28,9 +28,9 @@
             android:textStyle="bold" />
 
         <TextView
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="영양성분표를 카메라로 촬영하거나\n
@@ -39,28 +39,106 @@
             android:textSize="13sp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="168sp"
             android:layout_marginTop="29dp"
             android:background="@drawable/rectangle_roundfull"
-            android:layout_width="match_parent"
-            android:backgroundTint="@color/light_blue"
-            android:layout_height="168sp">
+            android:backgroundTint="@color/light_blue">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginRight="32dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                android:id="@+id/left"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/right"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/selectorCamera"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/selector_camera"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="24sp"
+                        android:layout_height="24sp"
+                        android:src="@drawable/camera3x"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="카메라"
+                    android:textColor="#4A545E"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selectorCamera" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/right"
+                app:layout_constraintStart_toEndOf="@+id/left"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/selectorPen"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/selector_pen"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="24sp"
+                        android:layout_height="24sp"
+                        android:src="@drawable/pen3x"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="직접 입력"
+                    android:textColor="#4A545E"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selectorPen" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -77,11 +155,11 @@
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="37dp"/>
+            android:layout_height="37dp" />
 
 
     </LinearLayout>
