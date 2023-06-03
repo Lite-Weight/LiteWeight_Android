@@ -1,5 +1,6 @@
 package com.konkuk.capture.ui.enroll
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,11 +27,23 @@ class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-
+        //등록방법 선택
         initSelector()
+        //다음화면 넘어감
+        initNext()
 
+    }
 
-
+    private fun initNext() {
+        binding.btnContinue.setOnClickListener {
+            if (binding.selectorCamera.isSelected) {
+                val intent = Intent(context,EnrollCameraInput::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(context,EnrollTextInput::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun initSelector() {
