@@ -26,6 +26,9 @@ object Versions {
 
     // Lifecycle
     const val LIFECYCLE = "2.6.1"
+
+    // Database
+    const val ROOM = "2.5.0"
 }
 
 object Kotlin {
@@ -35,15 +38,18 @@ object Kotlin {
 object AndroidX {
     const val CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
     const val APP_COMPAT = "androidx.appcompat:appcompat:${Versions.APP_COMPAT}"
-    const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:${Versions.CONSTRAINT_LAYOUT}"
+    const val CONSTRAINT_LAYOUT =
+        "androidx.constraintlayout:constraintlayout:${Versions.CONSTRAINT_LAYOUT}"
 
     // Navigation
-    const val NAVIGATION_FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
+    const val NAVIGATION_FRAGMENT_KTX =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
     const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
 
     // LifeCycle
     const val LIFECYCLE_LIVEDATA = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LIFECYCLE}"
-    const val LIFECYCLE_VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE}"
+    const val LIFECYCLE_VIEWMODEL =
+        "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE}"
 }
 
 object Material {
@@ -63,4 +69,9 @@ object DI {
     const val HILT = "com.google.dagger:hilt-android:${Versions.HILT}"
     const val HILT_COMPLIER = "com.google.dagger:hilt-compiler:${Versions.HILT}"
     const val HILT_GRADLE_PLUGIN = "com.google.dagger:hilt-android-gradle-plugin:${Versions.HILT}"
+}
+
+object ROOM {
+    const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
+    const val ROOM_COMPLIER = "androidx.room:room-compiler:${Versions.ROOM}"
 }
