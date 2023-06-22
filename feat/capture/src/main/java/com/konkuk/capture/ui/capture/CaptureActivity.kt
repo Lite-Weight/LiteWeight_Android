@@ -65,9 +65,10 @@ class CaptureActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun processImageRecognize(image: InputImage) = with(binding) {
-        tvProgress.text = "처리중"
+        tvProgressTitle.text = "처리중"
         recognizer.process(image).addOnSuccessListener { visionText ->
-            tvProgress.text = "결과 보러가기"
+            tvProgressTitle.text = "결과 보러가기"
+            tvProgressContent.text = "move to next page"
             tvProgress.setOnClickListener {
                 finish()
                 startActivity(
@@ -81,7 +82,8 @@ class CaptureActivity : AppCompatActivity() {
             }
         }.addOnFailureListener { e ->
             tvProgress.setOnClickListener {
-                tvProgress.text = "인식 실패\n다시 시도하기"
+                tvProgressTitle.text = "사진을 다시 찍어주세요"
+                tvProgressContent.text = "fail task"
                 captureDialog.show(supportFragmentManager, "CaptureDialogFragment")
             }
         }
