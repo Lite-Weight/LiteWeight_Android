@@ -7,4 +7,6 @@
     <color name="light_blue">#DCEDF9</color>
     <color name="stroke_deepblue">#1C6BA4</color>
     <color name="stroke_yello">#E09F1F</color>
+    <color name="text_gray">#4A545E</color>
+    <color name="text_hint_gray">#8D94A0</color>
 </resources>

@@ -12,5 +12,14 @@ class EnrollCameraInput : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEnrollCameraInputBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // 뒤로가기
+        initBack()
+    }
+
+    private fun initBack() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 }
