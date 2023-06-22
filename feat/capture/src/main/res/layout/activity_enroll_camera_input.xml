@@ -78,8 +78,9 @@
         <Button
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/main_blue"
+            android:layout_height="54dp"
+            android:background="@drawable/btn_customfull"
+            android:backgroundTint="@color/main_blue"
             android:gravity="center"
             android:paddingVertical="12dp"
             android:text="다음"
