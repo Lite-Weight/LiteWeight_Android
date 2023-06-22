@@ -29,6 +29,9 @@ object Versions {
 
     // Database
     const val ROOM = "2.5.0"
+
+    // MLKIT
+    const val TEXT_RECOGNITION = "16.0.0"
 }
 
 object Kotlin {
@@ -74,4 +77,8 @@ object DI {
 object ROOM {
     const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
     const val ROOM_COMPLIER = "androidx.room:room-compiler:${Versions.ROOM}"
+}
+
+object MLKIT {
+    const val TEXT_RECOGNITION = "com.google.mlkit:text-recognition-korean:${Versions.TEXT_RECOGNITION}"
 }
