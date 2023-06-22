@@ -27,38 +27,35 @@ class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        //등록방법 선택
+        // 등록방법 선택
         initSelector()
-        //다음화면 넘어감
+        // 다음화면 넘어감
         initNext()
-
     }
 
     private fun initNext() {
         binding.btnContinue.setOnClickListener {
             if (binding.selectorCamera.isSelected) {
-                val intent = Intent(context,EnrollCameraInput::class.java)
+                val intent = Intent(context, EnrollCameraInput::class.java)
                 startActivity(intent)
             } else {
-                val intent = Intent(context,EnrollTextInput::class.java)
+                val intent = Intent(context, EnrollTextInput::class.java)
                 startActivity(intent)
             }
         }
     }
 
-    private fun initSelector() {
-        //카메라 혹은 펜 둘중 하나 선택 하는 버튼(카메라가 기본 선택)
-        binding.apply {
+    private fun initSelector() = with(binding) {
+        // 카메라 혹은 펜 둘중 하나 선택 하는 버튼(카메라가 기본 선택)
+        selectorCamera.isSelected = true
+        selectorPen.isSelected = false
+        selectorCamera.setOnClickListener {
             selectorCamera.isSelected = true
             selectorPen.isSelected = false
-            selectorCamera.setOnClickListener {
-                selectorCamera.isSelected = true
-                selectorPen.isSelected = false
-            }
-            selectorPen.setOnClickListener {
-                selectorCamera.isSelected = false
-                selectorPen.isSelected = true
-            }
+        }
+        selectorPen.setOnClickListener {
+            selectorCamera.isSelected = false
+            selectorPen.isSelected = true
         }
     }
 

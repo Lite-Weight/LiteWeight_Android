@@ -1,17 +1,15 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
-    namespace = "com.konkuk.personal"
-    compileSdk = Versions.COMPILE_SDK_VERSION
+    namespace = "com.konkuk.common"
+    compileSdk = 33
 
     defaultConfig {
-        minSdk = Versions.MIN_SDK_VERSION
-        targetSdk = Versions.TARGET_SDK_VERSION
+        minSdk = 24
+        targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -31,15 +29,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = Versions.JVM_TARGET
-    }
-    dataBinding {
-        enable = true
+        jvmTarget = "1.8"
     }
 }
 
 dependencies {
-    implementation(project(":common"))
 
     // Android
     implementation(AndroidX.CORE_KTX)
@@ -51,20 +45,4 @@ dependencies {
     implementation(UnitTest.JUNIT)
     implementation(AndroidTest.ANDROID_JUNIT)
     implementation(AndroidTest.ESPRESSO_CORE)
-
-    // Navigation
-    implementation(AndroidX.NAVIGATION_FRAGMENT_KTX)
-    implementation(AndroidX.NAVIGATION_UI_KTX)
-
-    // Lifecycle (by viewModels())
-    implementation(AndroidX.LIFECYCLE_VIEWMODEL)
-    implementation(AndroidX.LIFECYCLE_LIVEDATA)
-
-    // DI
-    implementation(DI.HILT)
-    kapt(DI.HILT_COMPLIER)
-}
-
-kapt {
-    correctErrorTypes = true
 }
