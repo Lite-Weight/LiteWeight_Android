@@ -3,6 +3,12 @@
 
     <application>
         <activity
+            android:name=".ui.result.CaptureResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.capture.CaptureActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.enroll.EnrollTextInput"
             android:exported="false" />
         <activity
