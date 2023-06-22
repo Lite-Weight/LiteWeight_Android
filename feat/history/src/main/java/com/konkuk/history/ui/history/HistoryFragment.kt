@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.konkuk.common.Extension.toDate
 import com.konkuk.history.databinding.FragmentHistoryBinding
 import com.konkuk.history.domain.model.HistoryCalendarModel
 import com.konkuk.history.domain.model.HistoryItemModel
@@ -63,35 +64,48 @@ class HistoryFragment : Fragment() {
             LinearLayoutManager.VERTICAL,
             false,
         )
-        historyAdapter = HistoryAdapter(historyDataList) { data ->
-//            bid
+        historyAdapter = HistoryAdapter() { data ->
+            viewModel.selectDay(data.date.toDate("dd").toInt())
         }
         HistoryRecyclerView.adapter = historyAdapter
     }
 
+    /*    private fun initData() {
+            val calendar = Calendar.getInstance()
+            // 이번 달의 말일
+            val totalDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+            val dateFormat = SimpleDateFormat("dd", Locale.getDefault())
+            val dayFormat = SimpleDateFormat("E", Locale.getDefault())
+
+            for (i in 0 until totalDays) {
+                val date = dateFormat.format(calendar.time)
+                val dayOfWeek = dayFormat.format(calendar.time)
+
+                dataList.add(HistoryCalendarModel(date, dayOfWeek))
+
+                if (date == totalDays.toString()) {
+                    break
+                }
+                calendar.add(Calendar.DAY_OF_MONTH, 1)
+            }
+        }*/
+
     private fun initData() {
         val calendar = Calendar.getInstance()
-        // 이번 달의 말일
+        calendar.set(Calendar.DAY_OF_MONTH, 1) // 이번 달의 1일로 설정
+
         val totalDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         val dateFormat = SimpleDateFormat("dd", Locale.getDefault())
         val dayFormat = SimpleDateFormat("E", Locale.getDefault())
 
-        for (i in 0 until totalDays) {
+        for (i in 1..totalDays) {
             val date = dateFormat.format(calendar.time)
             val dayOfWeek = dayFormat.format(calendar.time)
 
             dataList.add(HistoryCalendarModel(date, dayOfWeek))
 
-            if (date == totalDays.toString()) {
-                break
-            }
             calendar.add(Calendar.DAY_OF_MONTH, 1)
         }
-
-        historyDataList.add(HistoryItemModel(12, "수학", 200))
-        historyDataList.add(HistoryItemModel(12, "수학", 200))
-        historyDataList.add(HistoryItemModel(12, "수학", 200))
-        historyDataList.add(HistoryItemModel(12, "수학", 200))
     }
 
     private fun initRecyclerView() = with(binding) {
@@ -145,9 +159,7 @@ class HistoryFragment : Fragment() {
             }
 
             is HistoryListUiState.Avail -> {
-//               todo 예를  adapter에 넣으면 됨.
-//                historyListTextView.text = historyListUiState.list
-//                HistoryRecyclerView.adapter = historyAdapter
+                historyAdapter.submitList(historyListUiState.list)
             }
         }
     }
