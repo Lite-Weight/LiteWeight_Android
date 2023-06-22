@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -45,4 +46,9 @@ dependencies {
     implementation(UnitTest.JUNIT)
     implementation(AndroidTest.ANDROID_JUNIT)
     implementation(AndroidTest.ESPRESSO_CORE)
+
+    // Room
+    implementation(AndroidX.ROOM_RUNTIME)
+    annotationProcessor(AndroidX.ROOM_COMPLIER)
+    ksp(AndroidX.ROOM_COMPLIER)
 }

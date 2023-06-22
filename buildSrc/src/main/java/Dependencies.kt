@@ -53,6 +53,10 @@ object AndroidX {
     const val LIFECYCLE_LIVEDATA = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LIFECYCLE}"
     const val LIFECYCLE_VIEWMODEL =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE}"
+
+    // Room
+    const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
+    const val ROOM_COMPLIER = "androidx.room:room-compiler:${Versions.ROOM}"
 }
 
 object Material {
@@ -72,11 +76,6 @@ object DI {
     const val HILT = "com.google.dagger:hilt-android:${Versions.HILT}"
     const val HILT_COMPLIER = "com.google.dagger:hilt-compiler:${Versions.HILT}"
     const val HILT_GRADLE_PLUGIN = "com.google.dagger:hilt-android-gradle-plugin:${Versions.HILT}"
-}
-
-object ROOM {
-    const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
-    const val ROOM_COMPLIER = "androidx.room:room-compiler:${Versions.ROOM}"
 }
 
 object MLKIT {
