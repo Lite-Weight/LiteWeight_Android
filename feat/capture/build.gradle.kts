@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
 
     // Android
     implementation(AndroidX.CORE_KTX)
