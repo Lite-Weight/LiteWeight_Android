@@ -8,10 +8,13 @@ import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import com.konkuk.capture.databinding.ActivityCaptureBinding
 import com.konkuk.capture.ui.result.CaptureResultActivity
+import com.konkuk.capture.ui.result.CaptureResultViewModel.Companion.NAME_KEY
+import com.konkuk.capture.ui.result.CaptureResultViewModel.Companion.OCR_RESULT_KEY
 
 class CaptureActivity : AppCompatActivity() {
 
@@ -27,7 +30,9 @@ class CaptureActivity : AppCompatActivity() {
             (it.data?.extras?.get("data") as Bitmap?)?.let { bitmap ->
                 binding.ivNutritionInfo.setImageBitmap(bitmap)
                 processImageRecognize(InputImage.fromBitmap(bitmap, 0))
-            }
+            } ?: reCapture()
+        } else {
+            reCapture()
         }
     }
 
@@ -38,7 +43,9 @@ class CaptureActivity : AppCompatActivity() {
             it.data?.data?.let { uri ->
                 binding.ivNutritionInfo.setImageURI(uri)
                 processImageRecognize(InputImage.fromFilePath(this@CaptureActivity, uri))
-            }
+            } ?: reCapture()
+        } else {
+            reCapture()
         }
     }
 
@@ -67,25 +74,37 @@ class CaptureActivity : AppCompatActivity() {
     private fun processImageRecognize(image: InputImage) = with(binding) {
         tvProgressTitle.text = "처리중"
         recognizer.process(image).addOnSuccessListener { visionText ->
-            tvProgressTitle.text = "결과 보러가기"
-            tvProgressContent.text = "move to next page"
-            tvProgress.setOnClickListener {
-                finish()
-                startActivity(
-                    Intent(this@CaptureActivity, CaptureResultActivity::class.java).apply {
-                        putExtra(
-                            CaptureResultActivity.OCR_RESULT_KEY,
-                            visionText.text,
-                        )
-                    },
-                )
-            }
-        }.addOnFailureListener { e ->
-            tvProgress.setOnClickListener {
-                tvProgressTitle.text = "사진을 다시 찍어주세요"
-                tvProgressContent.text = "fail task"
-                captureDialog.show(supportFragmentManager, "CaptureDialogFragment")
-            }
+            doneCapture(visionText)
+        }.addOnFailureListener { _ ->
+            reCapture()
+        }
+    }
+
+    private fun doneCapture(visionText: Text) = with(binding) {
+        tvProgressTitle.text = "결과 보러가기"
+        tvProgressContent.text = "move to next page"
+        tvProgress.setOnClickListener {
+            finish()
+            startActivity(
+                Intent(this@CaptureActivity, CaptureResultActivity::class.java).apply {
+                    putExtra(
+                        OCR_RESULT_KEY,
+                        visionText.text,
+                    )
+                    putExtra(
+                        NAME_KEY,
+                        intent.getStringExtra(NAME_KEY),
+                    )
+                },
+            )
+        }
+    }
+
+    private fun reCapture() = with(binding) {
+        tvProgressTitle.text = "사진을 다시 찍어주세요"
+        tvProgressContent.text = "fail task"
+        tvProgress.setOnClickListener {
+            captureDialog.show(supportFragmentManager, "CaptureDialogFragment")
         }
     }
 }

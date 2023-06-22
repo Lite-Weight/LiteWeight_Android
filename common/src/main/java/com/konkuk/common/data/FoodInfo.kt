@@ -1,9 +1,11 @@
 package com.konkuk.common.data
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "foodInfo")
 data class FoodInfo(
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val name: String,
     val date: Long,
     val carbohydrates: Float,

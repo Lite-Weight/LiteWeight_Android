@@ -1,5 +1,6 @@
 package com.konkuk.history.data.di
 
+import com.konkuk.common.data.FoodInfoDao
 import com.konkuk.history.data.datasource.HistoryDataSource
 import com.konkuk.history.data.repository.HistoryRepositoryImp
 import com.konkuk.history.domain.repository.HistoryRepository
@@ -15,8 +16,8 @@ class HistoryDataModule {
 
     @Provides
     @Singleton
-    fun provideHistoryDataSource(): HistoryDataSource {
-        return HistoryDataSource()
+    fun provideHistoryDataSource(foodInfoDao: FoodInfoDao): HistoryDataSource {
+        return HistoryDataSource(foodInfoDao)
     }
 
     @Provides

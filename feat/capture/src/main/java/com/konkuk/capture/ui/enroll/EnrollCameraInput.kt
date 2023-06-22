@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.konkuk.capture.databinding.ActivityEnrollCameraInputBinding
 import com.konkuk.capture.ui.capture.CaptureActivity
-import com.konkuk.capture.ui.result.CaptureResultActivity
+import com.konkuk.capture.ui.result.CaptureResultViewModel.Companion.NAME_KEY
 
 class EnrollCameraInput : AppCompatActivity() {
 
@@ -25,7 +25,7 @@ class EnrollCameraInput : AppCompatActivity() {
             finish()
             startActivity(
                 Intent(this@EnrollCameraInput, CaptureActivity::class.java).apply {
-                    putExtra(CaptureResultActivity.NAME_KEY, etName.text.toString())
+                    putExtra(NAME_KEY, etName.text.toString())
                 },
             )
         }

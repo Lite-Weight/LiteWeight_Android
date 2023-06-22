@@ -2,6 +2,8 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -49,6 +51,11 @@ dependencies {
 
     // Room
     implementation(AndroidX.ROOM_RUNTIME)
+    implementation(AndroidX.ROOM_KTX)
     annotationProcessor(AndroidX.ROOM_COMPLIER)
     ksp(AndroidX.ROOM_COMPLIER)
+
+    // DI
+    implementation(DI.HILT)
+    kapt(DI.HILT_COMPLIER)
 }
