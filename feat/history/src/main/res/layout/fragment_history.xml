@@ -11,31 +11,64 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="today" />
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="28dp"
+            android:text="기록"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/CalendarRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/HistoryRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="46dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:text="today"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/todayTextView"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="today" />
+            android:text="today"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/selectButton1"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="select day 1" />
+            android:text="select day 1"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/selectButton2"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="select day 2" />
+            android:text="select day 2"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/selectButton3"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="select day 3" />
+            android:text="select day 3"
+            android:visibility="gone" />
 
 
         <TextView
@@ -43,11 +76,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="selected day"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/historyListTextView"
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     </LinearLayout>
 </layout>
