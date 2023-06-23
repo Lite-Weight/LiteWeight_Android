@@ -1,5 +1,6 @@
 package com.konkuk.personal.ui.personal
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,13 +51,19 @@ class PersonalFragment : Fragment() {
         }
     }
 
-    private fun updateCaloriesProgress(caloriesUiState: CaloriesUiState) {
+    @SuppressLint("SetTextI18n")
+    private fun updateCaloriesProgress(caloriesUiState: CaloriesUiState) = with(binding) {
         when (caloriesUiState) {
             is CaloriesUiState.Uninitialized -> {} // TODO
             is CaloriesUiState.Error -> {} // TODO
             is CaloriesUiState.InProgress -> {
                 // 칼로리 UI 갱신하는 부분
-                binding.caloriesTextView.text = "${caloriesUiState.calories} calories"
+                caloriesTextView.text = "${caloriesUiState.calories} calories"
+                txtCalorie.text = "${caloriesUiState.calories} kcal"
+                progressBar.progress = caloriesUiState.progress
+                txtCalPercent.text = caloriesUiState.progress.toString() + "%"
+                /* caloriesUiState.calories
+                 caloriesUiState.progress*/
             }
         }
     }
