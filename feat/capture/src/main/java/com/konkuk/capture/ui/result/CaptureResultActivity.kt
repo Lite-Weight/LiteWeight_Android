@@ -35,7 +35,7 @@ class CaptureResultActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initViews() {
-        binding.tvResult.text = viewModel.name.value
+    private fun initViews() = with(binding) {
+//        txtCalorie.text = "${viewModel.calories.value} kcal"
     }
 }
