@@ -1,6 +1,5 @@
 package com.konkuk.history.data.datasource
 
-import android.util.Log
 import com.konkuk.common.Extension.toDate
 import com.konkuk.common.data.FoodInfo
 import com.konkuk.common.data.FoodInfoDao
@@ -13,11 +12,9 @@ import javax.inject.Inject
 class HistoryDataSource @Inject constructor(private val foodInfoDao: FoodInfoDao) {
     fun getFoodHistory(year: Int, month: Int, day: Int): Result<Flow<List<HistoryItemModel>>> {
         return kotlin.runCatching {
-            Log.d("tag HistoryDataSource", "target $year $month $day")
             foodInfoDao.getAll().map { foodInfos: List<FoodInfo> ->
                 foodInfos.filter {
                     val (y, m, d) = it.date.toDate("YYYY-MM-dd").split('-').map { it.toInt() }
-                    Log.d("HistoryDataSource", "$y, $m, $d")
                     year == y && month == m && day == d
                 }.map { foodInfo ->
                     foodInfo.toHistoryItemModel()
