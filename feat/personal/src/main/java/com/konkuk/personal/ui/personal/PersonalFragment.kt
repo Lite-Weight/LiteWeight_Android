@@ -68,12 +68,15 @@ class PersonalFragment : Fragment() {
         }
     }
 
-    private fun updateNutrition(nutritionUiState: NutritionUiState) {
+    private fun updateNutrition(nutritionUiState: NutritionUiState) = with(binding) {
         when (nutritionUiState) {
             is NutritionUiState.Uninitialized -> {} // TODO
             is NutritionUiState.Error -> {} // TODO
             is NutritionUiState.Avail -> {
                 // 탄단지 UI 갱신하는 부분
+                txtCarbohydrate.text = "${nutritionUiState.carbohydrates} g"
+                txtProtein.text = "${nutritionUiState.protein} g"
+                txtFat.text = "${nutritionUiState.fat} g"
                 nutritionUiState.carbohydrates
                 nutritionUiState.protein
                 nutritionUiState.fat
