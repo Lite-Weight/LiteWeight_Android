@@ -16,7 +16,8 @@ class HistoryDataSource @Inject constructor(private val foodInfoDao: FoodInfoDao
             Log.d("tag HistoryDataSource", "target $year $month $day")
             foodInfoDao.getAll().map { foodInfos: List<FoodInfo> ->
                 foodInfos.filter {
-                    val (y, m, d) = it.date.toDate("YYYY-MM-DD").split('-').map { it.toInt() }
+                    val (y, m, d) = it.date.toDate("YYYY-MM-dd").split('-').map { it.toInt() }
+                    Log.d("HistoryDataSource", "$y, $m, $d")
                     year == y && month == m && day == d
                 }.map { foodInfo ->
                     foodInfo.toHistoryItemModel()

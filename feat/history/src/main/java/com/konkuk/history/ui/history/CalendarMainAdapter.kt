@@ -1,36 +1,27 @@
 package com.konkuk.history.ui.history
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.konkuk.common.R
 import com.konkuk.history.databinding.CalendarItemBinding
 import com.konkuk.history.domain.model.HistoryCalendarModel
 
 class CalendarMainAdapter(
-    private val items: ArrayList<HistoryCalendarModel>,
     private val onClick: (HistoryCalendarModel) -> Unit,
-) : RecyclerView.Adapter<CalendarMainAdapter.ViewHolder>() {
+) : ListAdapter<HistoryCalendarModel, CalendarMainAdapter.ViewHolder>(diffUtil) {
 
-    //    private var selectedItemPosition = RecyclerView.SCROLLBAR_POSITION_LEFT
-    private var selectedItemPosition = RecyclerView.SCROLLBAR_POSITION_DEFAULT
-
-    inner class ViewHolder(val binding: CalendarItemBinding) :
+    inner class ViewHolder(private val binding: CalendarItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        @SuppressLint("SetTextI18n")
         fun bind(data: HistoryCalendarModel) = with(binding) {
-            root.setOnClickListener {
-                onClick(data)
-            }
-
             tvDateCalendarItem.text = data.date
             tvDayCalendarItem.text = data.day
-
-            if (adapterPosition == selectedItemPosition) {
-                clCalendarItem.isSelected = true
+            if (data.isSelected) {
+                tvDateCalendarItem.text = data.date
+                clCalendarItem.setBackgroundResource(com.konkuk.history.R.drawable.calendar_item_checked)
                 tvDateCalendarItem.setTextColor(
                     ContextCompat.getColor(
                         itemView.context,
@@ -44,7 +35,7 @@ class CalendarMainAdapter(
                     ),
                 )
             } else {
-                clCalendarItem.isSelected = false
+                clCalendarItem.setBackgroundResource(com.konkuk.history.R.drawable.calendar_item_background)
                 tvDateCalendarItem.setTextColor(
                     ContextCompat.getColor(
                         itemView.context,
@@ -59,15 +50,8 @@ class CalendarMainAdapter(
                 )
             }
 
-            clCalendarItem.setOnClickListener {
-                // 기존에 선택된 아이템의 선택 상태 해제
-                if (selectedItemPosition != RecyclerView.NO_POSITION) {
-                    notifyItemChanged(selectedItemPosition)
-                }
-
-                // 현재 아이템 선택
-                selectedItemPosition = adapterPosition
-                notifyItemChanged(selectedItemPosition)
+            root.setOnClickListener {
+                onClick(data)
             }
         }
     }
@@ -78,12 +62,25 @@ class CalendarMainAdapter(
         return ViewHolder(binding)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(currentList[position])
     }
 
-    override fun getItemCount(): Int {
-        return items.size
+    companion object {
+        private val diffUtil = object : DiffUtil.ItemCallback<HistoryCalendarModel>() {
+            override fun areItemsTheSame(
+                oldItem: HistoryCalendarModel,
+                newItem: HistoryCalendarModel,
+            ): Boolean {
+                return oldItem.date == newItem.date
+            }
+
+            override fun areContentsTheSame(
+                oldItem: HistoryCalendarModel,
+                newItem: HistoryCalendarModel,
+            ): Boolean {
+                return oldItem.isSelected == newItem.isSelected
+            }
+        }
     }
 }

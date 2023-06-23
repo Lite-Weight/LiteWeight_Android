@@ -12,9 +12,8 @@ import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import com.konkuk.capture.databinding.ActivityCaptureBinding
-import com.konkuk.capture.ui.result.CaptureResultActivity
-import com.konkuk.capture.ui.result.CaptureResultViewModel.Companion.NAME_KEY
-import com.konkuk.capture.ui.result.CaptureResultViewModel.Companion.OCR_RESULT_KEY
+import com.konkuk.capture.ui.enroll.EnrollTextInput
+import com.konkuk.capture.ui.enroll.EnrollTextInputViewModel.Companion.OCR_RESULT_KEY
 
 class CaptureActivity : AppCompatActivity() {
 
@@ -86,14 +85,10 @@ class CaptureActivity : AppCompatActivity() {
         tvProgress.setOnClickListener {
             finish()
             startActivity(
-                Intent(this@CaptureActivity, CaptureResultActivity::class.java).apply {
+                Intent(this@CaptureActivity, EnrollTextInput::class.java).apply {
                     putExtra(
                         OCR_RESULT_KEY,
                         visionText.text,
-                    )
-                    putExtra(
-                        NAME_KEY,
-                        intent.getStringExtra(NAME_KEY),
                     )
                 },
             )

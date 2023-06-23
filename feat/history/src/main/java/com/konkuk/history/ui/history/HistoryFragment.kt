@@ -10,15 +10,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.konkuk.common.Extension.toDate
 import com.konkuk.history.databinding.FragmentHistoryBinding
-import com.konkuk.history.domain.model.HistoryCalendarModel
-import com.konkuk.history.domain.model.HistoryItemModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.Date
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
@@ -31,10 +26,6 @@ class HistoryFragment : Fragment() {
     private lateinit var calendarAdapter: CalendarMainAdapter
 
     private lateinit var historyAdapter: HistoryAdapter
-
-    private var dataList = ArrayList<HistoryCalendarModel>()
-
-    private var historyDataList = ArrayList<HistoryItemModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,76 +45,35 @@ class HistoryFragment : Fragment() {
         initViews()
         observeUiState()
         initRecyclerView()
-        initData()
         initHistoryRecyclerView()
     }
 
     private fun initHistoryRecyclerView() = with(binding) {
-        HistoryRecyclerView.layoutManager = LinearLayoutManager(
+        historyRecyclerView.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL,
             false,
         )
-        historyAdapter = HistoryAdapter() { data ->
-            viewModel.selectDay(data.date.toDate("dd").toInt())
+        historyAdapter = HistoryAdapter { data ->
         }
-        HistoryRecyclerView.adapter = historyAdapter
-    }
-
-    /*    private fun initData() {
-            val calendar = Calendar.getInstance()
-            // 이번 달의 말일
-            val totalDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-            val dateFormat = SimpleDateFormat("dd", Locale.getDefault())
-            val dayFormat = SimpleDateFormat("E", Locale.getDefault())
-
-            for (i in 0 until totalDays) {
-                val date = dateFormat.format(calendar.time)
-                val dayOfWeek = dayFormat.format(calendar.time)
-
-                dataList.add(HistoryCalendarModel(date, dayOfWeek))
-
-                if (date == totalDays.toString()) {
-                    break
-                }
-                calendar.add(Calendar.DAY_OF_MONTH, 1)
-            }
-        }*/
-
-    private fun initData() {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_MONTH, 1) // 이번 달의 1일로 설정
-
-        val totalDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-        val dateFormat = SimpleDateFormat("dd", Locale.getDefault())
-        val dayFormat = SimpleDateFormat("E", Locale.getDefault())
-
-        for (i in 1..totalDays) {
-            val date = dateFormat.format(calendar.time)
-            val dayOfWeek = dayFormat.format(calendar.time)
-
-            dataList.add(HistoryCalendarModel(date, dayOfWeek))
-
-            calendar.add(Calendar.DAY_OF_MONTH, 1)
-        }
+        historyRecyclerView.adapter = historyAdapter
     }
 
     private fun initRecyclerView() = with(binding) {
-        CalendarRecyclerView.layoutManager = LinearLayoutManager(
+        calendarRecyclerView.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.HORIZONTAL,
             false,
-        )
-        calendarAdapter = CalendarMainAdapter(dataList) { data ->
-//            binding.
+        ).also {
+            it.scrollToPosition(Date(System.currentTimeMillis()).date - 1)
         }
-        CalendarRecyclerView.adapter = calendarAdapter
+        calendarAdapter = CalendarMainAdapter { data ->
+            viewModel.selectDay(data.date.toInt())
+        }
+        calendarRecyclerView.adapter = calendarAdapter
     }
 
     private fun initViews() = with(binding) {
-        selectButton1.setOnClickListener { viewModel.selectDay(1) }
-        selectButton2.setOnClickListener { viewModel.selectDay(2) }
-        selectButton3.setOnClickListener { viewModel.selectDay(3) }
     }
 
     private fun observeUiState() {
@@ -140,13 +90,9 @@ class HistoryFragment : Fragment() {
     private fun updateHistoryDate(historyDateUiState: HistoryDateUiState) = with(binding) {
         when (historyDateUiState) {
             is HistoryDateUiState.Uninitialized -> {}
-            is HistoryDateUiState.Error -> {
-                todayTextView.text = historyDateUiState.message
-            }
-
+            is HistoryDateUiState.Error -> {}
             is HistoryDateUiState.Avail -> {
-                todayTextView.text = historyDateUiState.today.toString()
-                selectedDayTextView.text = historyDateUiState.selectedDay.toString()
+                calendarAdapter.submitList(historyDateUiState.calendarList.toList())
             }
         }
     }
@@ -154,10 +100,7 @@ class HistoryFragment : Fragment() {
     private fun updateHistoryList(historyListUiState: HistoryListUiState) = with(binding) {
         when (historyListUiState) {
             is HistoryListUiState.Uninitialized -> {}
-            is HistoryListUiState.Error -> {
-                historyListTextView.text = historyListUiState.message
-            }
-
+            is HistoryListUiState.Error -> {}
             is HistoryListUiState.Avail -> {
                 historyAdapter.submitList(historyListUiState.list)
             }
