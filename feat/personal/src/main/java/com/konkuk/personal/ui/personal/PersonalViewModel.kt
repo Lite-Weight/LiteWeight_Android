@@ -26,7 +26,12 @@ class PersonalViewModel @Inject constructor(
             getCaloriesUseCase().onSuccess { value ->
                 value.collect { calories ->
                     _uiState.value =
-                        _uiState.value.copy(caloriesUiState = CaloriesUiState.InProgress(calories))
+                        _uiState.value.copy(
+                            caloriesUiState = CaloriesUiState.InProgress(
+                                progress = (calories * 100) / 2000,
+                                calories = calories,
+                            ),
+                        )
                 }
             }.onFailure {
                 _uiState.value =
