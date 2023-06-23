@@ -10,7 +10,7 @@ class PersonalDataSource {
             flow {
                 repeat(100) {
                     delay(20)
-                    emit(it + 1)
+                    emit(it * 20)
                 }
             },
         )

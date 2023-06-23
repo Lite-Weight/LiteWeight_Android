@@ -65,6 +65,8 @@ class CaptureActivity : AppCompatActivity() {
             takePictureLauncher.launch(takePictureIntent)
         }, {
             getPictureLauncher.launch(getPictureIntent)
+        }, {
+            reCapture()
         })
         captureDialog.show(supportFragmentManager, "CaptureDialogFragment")
     }

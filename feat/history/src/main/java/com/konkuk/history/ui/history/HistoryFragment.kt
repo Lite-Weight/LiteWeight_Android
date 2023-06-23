@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.konkuk.history.databinding.FragmentHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.Date
+import java.util.Calendar
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
@@ -54,7 +54,7 @@ class HistoryFragment : Fragment() {
             LinearLayoutManager.VERTICAL,
             false,
         )
-        historyAdapter = HistoryAdapter { data ->
+        historyAdapter = HistoryAdapter { _ ->
         }
         historyRecyclerView.adapter = historyAdapter
     }
@@ -65,7 +65,7 @@ class HistoryFragment : Fragment() {
             LinearLayoutManager.HORIZONTAL,
             false,
         ).also {
-            it.scrollToPosition(Date(System.currentTimeMillis()).date - 1)
+            it.scrollToPosition(Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
         }
         calendarAdapter = CalendarMainAdapter { data ->
             viewModel.selectDay(data.date.toInt())

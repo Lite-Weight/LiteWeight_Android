@@ -43,6 +43,8 @@ class PersonalFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
                     updateCaloriesProgress(uiState.caloriesUiState)
+                    updateNutrition(uiState.nutritionUiState)
+                    updateWeeklyNutrition(uiState.weeklyCaloriesUiState)
                 }
             }
         }
@@ -53,7 +55,33 @@ class PersonalFragment : Fragment() {
             is CaloriesUiState.Uninitialized -> {} // TODO
             is CaloriesUiState.Error -> {} // TODO
             is CaloriesUiState.InProgress -> {
-                binding.caloriesTextView.text = "${caloriesUiState.progress} calories"
+                // 칼로리 UI 갱신하는 부분
+                binding.caloriesTextView.text = "${caloriesUiState.calories} calories"
+            }
+        }
+    }
+
+    private fun updateNutrition(nutritionUiState: NutritionUiState) {
+        when (nutritionUiState) {
+            is NutritionUiState.Uninitialized -> {} // TODO
+            is NutritionUiState.Error -> {} // TODO
+            is NutritionUiState.Avail -> {
+                // 탄단지 UI 갱신하는 부분
+                nutritionUiState.carbohydrates
+                nutritionUiState.protein
+                nutritionUiState.fat
+            }
+        }
+    }
+
+    private fun updateWeeklyNutrition(weeklyCaloriesUiState: WeeklyCaloriesUiState) {
+        when (weeklyCaloriesUiState) {
+            is WeeklyCaloriesUiState.Uninitialized -> {} // TODO
+            is WeeklyCaloriesUiState.Error -> {} // TODO
+            is WeeklyCaloriesUiState.Avail -> {
+                // 주간 칼로리 UI 갱신
+                weeklyCaloriesUiState.weeklyCaloriesList[6].first // "6/23"
+                weeklyCaloriesUiState.weeklyCaloriesList[6].second // 745 (int 칼로리 값)
             }
         }
     }
