@@ -11,9 +11,6 @@
         <activity
             android:name=".ui.enroll.EnrollTextInput"
             android:exported="false" />
-        <activity
-            android:name=".ui.enroll.EnrollCameraInput"
-            android:exported="false" />
     </application>
 
 </manifest>

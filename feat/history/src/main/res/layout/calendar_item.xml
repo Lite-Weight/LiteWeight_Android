@@ -6,7 +6,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:background="@drawable/calendar_selector"
+        android:background="@drawable/rectangle_roundfull"
         android:orientation="vertical"
         android:padding="10dp">
 

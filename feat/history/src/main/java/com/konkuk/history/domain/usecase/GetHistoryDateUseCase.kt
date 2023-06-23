@@ -10,7 +10,7 @@ class GetHistoryDateUseCase @Inject constructor() {
         return kotlin.runCatching {
             flow {
                 val date = Date(System.currentTimeMillis())
-                emit(date.day)
+                emit(date.date)
             }
         }
     }

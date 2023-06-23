@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.konkuk.capture.databinding.FragmentBottomSheetEnrollBinding
+import com.konkuk.capture.ui.capture.CaptureActivity
 
 class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
@@ -35,8 +36,9 @@ class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     private fun initNext() {
         binding.btnContinue.setOnClickListener {
+            dismiss()
             if (binding.selectorCamera.isSelected) {
-                val intent = Intent(context, EnrollCameraInput::class.java)
+                val intent = Intent(context, CaptureActivity::class.java)
                 startActivity(intent)
             } else {
                 val intent = Intent(context, EnrollTextInput::class.java)

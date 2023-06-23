@@ -11,6 +11,6 @@ class GetHistoryListUseCase @Inject constructor(
 ) {
     operator fun invoke(selectedDay: Int): Result<Flow<List<HistoryItemModel>>> {
         val date = Date(System.currentTimeMillis())
-        return historyRepository.getFoodHistory(date.year, date.month, selectedDay)
+        return historyRepository.getFoodHistory(date.year + 1900, date.month + 1, selectedDay)
     }
 }
