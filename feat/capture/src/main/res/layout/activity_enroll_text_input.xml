@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
@@ -86,8 +86,162 @@
                     android:backgroundTint="@color/main_blue"
                     android:hint="ex)코카콜라"
                     android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
                     android:textColorHint="@color/text_hint_gray"
                     android:textSize="32sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/back_gray" />
+
+
+                <TextView
+                    android:id="@+id/txt_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="21dp"
+                    android:text="영양정보"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="28dp"
+                    android:paddingVertical="21dp">
+
+
+                    <TextView
+                        android:id="@+id/txt_calorie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="칼로리"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_calorie"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_stroke"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:padding="13dp"
+                        android:textColorHint="@color/text_hint_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="13dp"
+                        android:text="kcal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/back_gray" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="28dp"
+                    android:paddingTop="21dp">
+
+
+                    <TextView
+                        android:id="@+id/txt_carbohydrate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="탄수화물"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_carbohydrate"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_stroke"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:padding="13dp"
+                        android:textColorHint="@color/text_hint_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="13dp"
+                        android:text="g"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="21dp"
+                    android:paddingHorizontal="28dp">
+
+                    <TextView
+                        android:id="@+id/txt_sugar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:text="당류"
+                        android:textColor="@color/text_gray"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_sugar"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_stroke"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:padding="13dp"
+                        android:textColorHint="@color/text_hint_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="13dp"
+                        android:text="g"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <View
                     android:layout_width="match_parent"
@@ -100,43 +254,40 @@
                     android:paddingHorizontal="28dp"
                     android:paddingVertical="21dp">
 
+
                     <TextView
-                        android:id="@+id/txt_top"
+                        android:id="@+id/txt_protein"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="영양정보"
+                        android:text="단백질"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <EditText
+                        android:id="@+id/et_protein"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_stroke"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:padding="13dp"
+                        android:textColorHint="@color/text_hint_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="28dp"
-                        android:text="칼로리"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_top" />
-
-                    <EditText
+                        android:layout_marginEnd="13dp"
+                        android:text="g"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:id="@+id/et_calorie"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:autofillHints="no"
-                        android:background="@drawable/btn_stroke"
-                        android:hint="kcal"
-                        android:importantForAutofill="no"
-                        android:textColorHint="@color/text_hint_gray"
-                        android:textSize="16sp" />
-
-
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
@@ -144,17 +295,242 @@
                     android:layout_height="10dp"
                     android:background="@color/back_gray" />
 
-                <Button
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="28dp"
+                    android:paddingTop="21dp">
+
+
+                    <TextView
+                        android:id="@+id/txt_fat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="지방"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_fat"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_stroke"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:padding="13dp"
+                        android:textColorHint="@color/text_hint_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="13dp"
+                        android:text="g"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="14dp"
+                    android:paddingHorizontal="28dp">
+
+                    <TextView
+                        android:id="@+id/txt_saturatedFat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:text="포화지방"
+                        android:textColor="@color/text_gray"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_saturatedFat"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_stroke"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:padding="13dp"
+                        android:textColorHint="@color/text_hint_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="13dp"
+                        android:text="g"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="21dp"
+                    android:paddingHorizontal="28dp">
+
+                    <TextView
+                        android:id="@+id/txt_transFat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:text="트랜스지방"
+                        android:textColor="@color/text_gray"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_transFat"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_stroke"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:padding="13dp"
+                        android:textColorHint="@color/text_hint_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="13dp"
+                        android:text="g"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/back_gray" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="28dp"
+                    android:paddingVertical="21dp">
+
+
+                    <TextView
+                        android:id="@+id/txt_cholesterol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="콜레스트롤"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_cholesterol"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_stroke"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:padding="13dp"
+                        android:textColorHint="@color/text_hint_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="13dp"
+                        android:text="mg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/back_gray" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="28dp"
+                    android:paddingVertical="21dp">
+
+
+                    <TextView
+                        android:id="@+id/txt_sodium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="나트륨"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/et_sodium"
+                        android:layout_width="130dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_stroke"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:maxLines="1"
+                        android:padding="13dp"
+                        android:textColorHint="@color/text_hint_gray"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="13dp"
+                        android:text="mg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_next"
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
-                    android:layout_marginHorizontal="28dp"
+                    android:layout_margin="28dp"
                     android:background="@drawable/btn_customfull"
                     android:backgroundTint="@color/main_blue"
+                    android:foreground="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:paddingVertical="12dp"
-                    android:text="다음"
-                    android:textColor="@color/white" />
+                    android:text="Apply"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
 
         </ScrollView>
