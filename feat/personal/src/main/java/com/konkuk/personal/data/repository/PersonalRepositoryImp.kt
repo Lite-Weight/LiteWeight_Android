@@ -11,4 +11,12 @@ class PersonalRepositoryImp @Inject constructor(
     override fun getCalories(): Result<Flow<Int>> {
         return personalDataSource.getCalories()
     }
+
+    override fun getNutrition(): Result<Flow<Triple<Float, Float, Float>>> {
+        return personalDataSource.getNutrition()
+    }
+
+    override suspend fun getWeeklyNutrition(): Result<List<Pair<Int, Int>>> {
+        return personalDataSource.getWeeklyNutrition()
+    }
 }

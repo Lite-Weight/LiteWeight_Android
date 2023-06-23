@@ -1,5 +1,6 @@
 package com.konkuk.personal.data.di
 
+import com.konkuk.common.data.FoodInfoDao
 import com.konkuk.personal.data.datasource.PersonalDataSource
 import com.konkuk.personal.data.repository.PersonalRepositoryImp
 import com.konkuk.personal.domain.repository.PersonalRepository
@@ -15,8 +16,8 @@ class PersonalDataModule {
 
     @Provides
     @Singleton
-    fun providePersonalDataSource(): PersonalDataSource {
-        return PersonalDataSource()
+    fun providePersonalDataSource(foodInfoDao: FoodInfoDao): PersonalDataSource {
+        return PersonalDataSource(foodInfoDao)
     }
 
     @Provides
