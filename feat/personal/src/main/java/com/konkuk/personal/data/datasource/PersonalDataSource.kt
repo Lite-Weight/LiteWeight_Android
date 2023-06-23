@@ -43,18 +43,22 @@ class PersonalDataSource @Inject constructor(private val foodInfoDao: FoodInfoDa
                     year == y && month == m && day == d
                 }.map {
                     Triple(it.carbohydrates, it.protein, it.fat)
-                }.reduce { total, it ->
-                    Triple(
-                        total.first + it.first,
-                        total.second + it.second,
-                        total.third + it.third,
-                    )
+                }.let { list ->
+                    var car = 0f
+                    var protein = 0f
+                    var fat = 0f
+                    list.forEach { (c, p, f) ->
+                        car += c
+                        protein += p
+                        fat += f
+                    }
+                    Triple(car, protein, fat)
                 }
             }
         }
     }
 
-    suspend fun getWeeklyNutrition(): Result<List<Int>> {
+    suspend fun getWeeklyNutrition(): Result<List<Pair<Int, Int>>> {
         val weeklyNutritionList = mutableListOf<Float>().apply { repeat(7) { add(0f) } }
         val weekList = mutableListOf<Triple<Int, Int, Int>>() // 0인덱스 = 오늘
         return kotlin.runCatching {
@@ -76,7 +80,7 @@ class PersonalDataSource @Inject constructor(private val foodInfoDao: FoodInfoDa
                     }
                 }
             }
-            weeklyNutritionList.map { it.toInt() }
+            weeklyNutritionList.mapIndexed { index, it -> Pair(weekList[index].third, it.toInt()) }
         }
     }
 }

@@ -16,7 +16,7 @@ class PersonalRepositoryImp @Inject constructor(
         return personalDataSource.getNutrition()
     }
 
-    override suspend fun getWeeklyNutrition(): Result<List<Int>> {
+    override suspend fun getWeeklyNutrition(): Result<List<Pair<Int, Int>>> {
         return personalDataSource.getWeeklyNutrition()
     }
 }
