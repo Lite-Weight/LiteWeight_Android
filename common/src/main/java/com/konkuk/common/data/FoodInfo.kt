@@ -1,8 +1,11 @@
 package com.konkuk.common.data
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "foodInfo")
 data class FoodInfo(
     @PrimaryKey(autoGenerate = true) val id: Long,
@@ -17,4 +20,4 @@ data class FoodInfo(
     val protein: Float,
     val fat: Float,
     val calories: Float,
-)
+) : Parcelable
