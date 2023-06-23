@@ -15,5 +15,6 @@
     <color name="result_pink">#F5E1E9</color>
     <color name="result_yellow">#FAF0DB</color>
     <color name="result_skyblue">#E3EDF7</color>
+    <color name="text_for_black">#2A4067</color>
 
 </resources>
