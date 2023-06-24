@@ -65,7 +65,7 @@ class HistoryFragment : Fragment() {
             LinearLayoutManager.HORIZONTAL,
             false,
         ).also {
-            it.scrollToPosition(Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+            it.scrollToPosition(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - 1)
         }
         calendarAdapter = CalendarMainAdapter { data ->
             viewModel.selectDay(data.date.toInt())
