@@ -5,7 +5,7 @@
 
     <item
         android:id="@id/personal_nav_graph"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/baseline_person_outline_24"
         android:title="@string/personal_nav_title"
         app:showAsAction="ifRoom"/>
 
@@ -15,7 +15,7 @@
 
     <item
         android:id="@id/history_nav_graph"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/baseline_favorite_border_24"
         android:title="@string/history_nav_title"
         app:showAsAction="ifRoom"/>
 </menu>

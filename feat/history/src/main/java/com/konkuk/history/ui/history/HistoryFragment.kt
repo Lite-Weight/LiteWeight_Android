@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.konkuk.common.ui.decoration.FirstItemDecoration
 import com.konkuk.history.databinding.FragmentHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -65,12 +66,13 @@ class HistoryFragment : Fragment() {
             LinearLayoutManager.HORIZONTAL,
             false,
         ).also {
-            it.scrollToPosition(Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+            it.scrollToPosition(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - 1)
         }
         calendarAdapter = CalendarMainAdapter { data ->
             viewModel.selectDay(data.date.toInt())
         }
         calendarRecyclerView.adapter = calendarAdapter
+        calendarRecyclerView.addItemDecoration(FirstItemDecoration())
     }
 
     private fun initViews() = with(binding) {

@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":feat:personal"))
     implementation(project(":feat:history"))
     implementation(project(":feat:capture"))
+    implementation(project(":common"))
 
     // Android
     implementation(AndroidX.CORE_KTX)
