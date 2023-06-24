@@ -39,25 +39,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         val navController = navHostFragment.navController
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.parent?.id) {
-                com.konkuk.personal.R.id.personal_nav_graph ->
-                    binding.toolbar.title =
-                        getString(R.string.personal_nav_title)
-                com.konkuk.history.R.id.history_nav_graph ->
-                    binding.toolbar.title =
-                        getString(R.string.history_nav_title)
-            }
-        }
-
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         binding.bottomNavigationView.setupWithNavController(navController)
     }
 
