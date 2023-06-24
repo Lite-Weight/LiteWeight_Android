@@ -15,15 +15,6 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <TextView
-                android:id="@+id/caloriesTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="hello"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -314,25 +305,24 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/back_gray" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이번주 이만큼 먹었어요"
-                android:textStyle="bold"
-                android:textSize="24sp"
                 android:textColor="@color/text_for_black"
-                />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <com.github.mikephil.charting.charts.LineChart
-                android:layout_marginTop="20dp"
                 android:id="@+id/line_chart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp" />
 
 
         </LinearLayout>

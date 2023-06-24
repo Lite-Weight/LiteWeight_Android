@@ -3,6 +3,7 @@ package com.konkuk.personal.ui.personal
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -90,13 +91,19 @@ class PersonalFragment : Fragment() {
             is CaloriesUiState.Uninitialized -> {} // TODO
             is CaloriesUiState.Error -> {} // TODO
             is CaloriesUiState.InProgress -> {
+                /* if (caloriesUiState.calories == null) {
+                     txtCalorie.text = "0 kcal"
+                     progressBar.progress = 0
+                     txtCalPercent.text = "0%"
+                 } else {*/
                 // 칼로리 UI 갱신하는 부분
-                caloriesTextView.text = "${caloriesUiState.calories} calories"
                 txtCalorie.text = "${caloriesUiState.calories} kcal"
                 progressBar.progress = caloriesUiState.progress
+                Log.d("progress", caloriesUiState.progress.toString())
                 txtCalPercent.text = caloriesUiState.progress.toString() + "%"
                 /* caloriesUiState.calories
                  caloriesUiState.progress*/
+//                }
             }
         }
     }
@@ -129,7 +136,8 @@ class PersonalFragment : Fragment() {
 
                     val entries = ArrayList<Entry>()
 
-                    for (i in weeklyCaloriesUiState.weeklyCaloriesList.indices) {
+                    // 그래프 역순 정렬
+                    for (i in 6 downTo 0) {
                         entries.add(
                             Entry(
                                 weeklyCaloriesUiState.weeklyCaloriesList[i].first.toFloat(),
