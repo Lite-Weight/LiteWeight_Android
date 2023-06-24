@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.konkuk.liteweight.ui.MainViewModel" />
@@ -14,21 +15,11 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <include
+            layout="@layout/content_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/Theme.LiteWeight_Android.AppBarOverlay">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/Theme.LiteWeight_Android.PopupOverlay" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <include layout="@layout/content_main" />
+            android:layout_height="match_parent"
+            android:layout_marginBottom="?attr/actionBarSize" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -44,6 +35,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:itemIconTint="@color/icon_color_selector"
+                app:labelVisibilityMode="unlabeled"
                 app:menu="@menu/nav_items" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -55,8 +48,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/stroke_deepblue"
+            android:contentDescription="@string/main_camera_button"
             android:onClick="@{() -> vm.onCaptureClick()}"
-            android:contentDescription="@string/main_camera_button" />
+            app:tint="@color/white"
+            android:src="@drawable/baseline_add_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
