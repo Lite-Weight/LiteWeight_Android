@@ -35,6 +35,12 @@ class HistoryAdapter(
             HistoryItem.backgroundTintList = ColorStateList.valueOf(Color.parseColor(itemColor))
             // 파랑 일때 글씨 흰색, 나머지는 검정색
             if (colorIndex == 0) {
+                HistoryTime.setTextColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        com.konkuk.common.R.color.white,
+                    ),
+                )
                 HistoryName.setTextColor(
                     ContextCompat.getColor(
                         itemView.context,
@@ -44,7 +50,7 @@ class HistoryAdapter(
                 HistoryCarlorie.setTextColor(
                     ContextCompat.getColor(
                         itemView.context,
-                        com.konkuk.common.R.color.white,
+                        com.konkuk.common.R.color.history_whiteText,
                     ),
                 )
             } else {
@@ -63,7 +69,7 @@ class HistoryAdapter(
                 HistoryCarlorie.setTextColor(
                     ContextCompat.getColor(
                         itemView.context,
-                        com.konkuk.common.R.color.black,
+                        com.konkuk.common.R.color.history_blackText,
                     ),
                 )
             }
