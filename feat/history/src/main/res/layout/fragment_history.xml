@@ -28,8 +28,8 @@
             android:id="@+id/historyRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="28dp"
-            android:layout_marginTop="46dp"
+            android:padding="28dp"
+            android:layout_marginTop="18dp"
             android:visibility="visible" />
 
         <LinearLayout
