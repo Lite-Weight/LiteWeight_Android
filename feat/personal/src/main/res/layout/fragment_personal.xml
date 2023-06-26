@@ -6,7 +6,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/back_white"
+        android:background="@color/white"
         tools:context=".ui.personal.PersonalFragment">
 
         <LinearLayout
@@ -211,8 +211,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.0 g"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_for_black"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ttcarbo" />
@@ -261,8 +262,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.0 g"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_for_black"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ttprotein" />
@@ -310,8 +312,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.0 g"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_for_black"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ttfat" />
@@ -326,10 +329,10 @@
                 android:background="@color/back_gray" />
 
             <TextView
-                android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="20dp"
                 android:text="이번주 이만큼 먹었어요"
                 android:textColor="@color/text_for_black"
                 android:textSize="24sp"
@@ -339,8 +342,30 @@
                 android:id="@+id/line_chart"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                 />
+                android:visibility="gone" />
 
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/back_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:text="오늘의 기록을 남겨주세요"
+                android:layout_gravity="center"
+                android:textColor="@color/text_for_black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

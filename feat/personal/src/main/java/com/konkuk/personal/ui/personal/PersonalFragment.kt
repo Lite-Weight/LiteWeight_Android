@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,6 +16,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -45,34 +49,6 @@ class PersonalFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         observeUiState()
-//        initChart()
-    }
-
-    private fun initChart() = with(binding) {
-        val entries = ArrayList<Entry>()
-
-        for (i in 0..6) {
-            entries.add(
-                Entry(
-                    i.toFloat(),
-                    i * 10.toFloat(),
-                ),
-            )
-        }
-
-        val lineDataSet = LineDataSet(entries, "주간 칼로리")
-        lineDataSet.color = Color.BLUE
-        lineDataSet.valueTextColor = Color.BLACK
-
-        val lineData = LineData(lineDataSet)
-
-        lineChart.data = lineData
-
-        val description = Description()
-        description.text = "주간 칼로리 그래프"
-        lineChart.description = description
-
-        lineChart.invalidate()
     }
 
     private fun observeUiState() {
@@ -133,10 +109,10 @@ class PersonalFragment : Fragment() {
                 is WeeklyCaloriesUiState.Error -> {} // TODO
                 is WeeklyCaloriesUiState.Avail -> {
                     // 주간 칼로리 UI 갱신
-                    val today = weeklyCaloriesUiState.weeklyCaloriesList[6].first // "6/23"
+                    weeklyCaloriesUiState.weeklyCaloriesList[6].first // "6/23"
                     weeklyCaloriesUiState.weeklyCaloriesList[6].second // 745 (int 칼로리 값)
 
-                    val entries = ArrayList<Entry>()
+                    val entries = ArrayList<BarEntry>()
 
                     for (i in 0..6) {
                         Log.d(
@@ -148,18 +124,65 @@ class PersonalFragment : Fragment() {
                     // 그래프 역순 정렬
                     for (i in 6 downTo 0) {
                         entries.add(
-                            Entry(
+                            BarEntry(
                                 weeklyCaloriesUiState.weeklyCaloriesList[i].first.toFloat(),
-//                                (today - i).toFloat(),
-                                weeklyCaloriesUiState.weeklyCaloriesList[6 - i].second.toFloat(),
+                                weeklyCaloriesUiState.weeklyCaloriesList[i].second.toFloat(),
                             ),
                         )
                     }
                     // 그래프 데이터 추가
-                    initChartDataSet(entries)
+                    initBarChart(entries)
                 }
             }
         }
+
+    private fun initBarChart(entries: ArrayList<BarEntry>) = with(binding) {
+        val barDataSet = BarDataSet(entries, "일간 칼로리")
+        barDataSet.color =
+            ContextCompat.getColor(requireContext(), com.konkuk.common.R.color.main_blue)
+
+        barDataSet.valueTextColor = Color.BLACK
+
+        val barData = BarData(barDataSet)
+
+        barChart.data = barData
+        barChart.setDrawBorders(false)
+        barChart.setDrawGridBackground(false)
+
+        /* val description = Description()
+         description.text = "주간 칼로리 그래프"*/
+        barChart.description.isEnabled = false
+
+        val legend = barChart.legend
+        legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+        legend.form = Legend.LegendForm.CIRCLE
+        legend.formSize = 11f
+        legend.textColor = Color.BLACK
+
+        val xAxis = barChart.xAxis
+        xAxis.valueFormatter = GraphAxisValueFormatter()
+        /*  xAxis.valueFormatter = object : ValueFormatter() {
+              override fun getFormattedValue(value: Float): String {
+                  return "${value.toInt()}일"
+              }
+          }*/
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.textColor = Color.BLACK
+        xAxis.textSize = 11f
+        xAxis.setDrawGridLines(false)
+        xAxis.setDrawAxisLine(false)
+
+        val yAxis = barChart.axisLeft
+        yAxis.textColor = Color.BLACK
+        yAxis.textSize = 11f
+        yAxis.setDrawGridLines(false)
+        yAxis.setDrawAxisLine(false)
+
+        barChart.axisRight.isEnabled = false
+        barChart.animateY(1000)
+        barChart.invalidate()
+    }
 
     // 그래프 데이터 추가 및 그리기
     private fun initChartDataSet(entries: ArrayList<Entry>) = with(binding) {
