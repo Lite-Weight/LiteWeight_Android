@@ -18,7 +18,7 @@ class HistoryAdapter(
 ) : ListAdapter<HistoryItemModel, HistoryAdapter.ViewHolder>(diffUtil) {
 
     private val colorList: List<String> =
-        listOf("#1C6BA4", "#F1E6EA", "#FAF0DB") // 파랑, 노랑, 초록 순서대로 색상 목록 생성
+        listOf("#1C6BA4", "#F1E6EA", "#FAF0DB") // 파랑, 분홍, 노랑 순서대로 색상 목록 생성
 
     inner class ViewHolder(val binding: HistoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -31,14 +31,10 @@ class HistoryAdapter(
             val colorIndex = adapterPosition % colorList.size // 아이템의 위치에 따라 색상 목록의 인덱스 계산
             val itemColor = colorList[colorIndex] // 해당 인덱스의 색상 선택
 
+            // 포지션 숫자에 따른 색 변경
             HistoryItem.backgroundTintList = ColorStateList.valueOf(Color.parseColor(itemColor))
+            // 파랑 일때 글씨 흰색, 나머지는 검정색
             if (colorIndex == 0) {
-                HistoryTime.setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        com.konkuk.common.R.color.white,
-                    ),
-                )
                 HistoryName.setTextColor(
                     ContextCompat.getColor(
                         itemView.context,
@@ -49,6 +45,25 @@ class HistoryAdapter(
                     ContextCompat.getColor(
                         itemView.context,
                         com.konkuk.common.R.color.white,
+                    ),
+                )
+            } else {
+                HistoryTime.setTextColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        com.konkuk.common.R.color.black,
+                    ),
+                )
+                HistoryName.setTextColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        com.konkuk.common.R.color.black,
+                    ),
+                )
+                HistoryCarlorie.setTextColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        com.konkuk.common.R.color.black,
                     ),
                 )
             }
