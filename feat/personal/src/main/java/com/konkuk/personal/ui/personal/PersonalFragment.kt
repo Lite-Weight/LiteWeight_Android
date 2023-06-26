@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.konkuk.personal.databinding.FragmentPersonalBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -69,19 +70,12 @@ class PersonalFragment : Fragment() {
             is CaloriesUiState.Uninitialized -> {} // TODO
             is CaloriesUiState.Error -> {} // TODO
             is CaloriesUiState.InProgress -> {
-                /* if (caloriesUiState.calories == null) {
-                     txtCalorie.text = "0 kcal"
-                     progressBar.progress = 0
-                     txtCalPercent.text = "0%"
-                 } else {*/
                 // 칼로리 UI 갱신하는 부분
                 txtCalorie.text = "${caloriesUiState.calories} kcal"
                 progressBar.progress = caloriesUiState.progress
+                animateProgressBar(caloriesUiState.progress)
                 Log.d("progress", caloriesUiState.progress.toString())
                 txtCalPercent.text = caloriesUiState.progress.toString() + "%"
-                /* caloriesUiState.calories
-                 caloriesUiState.progress*/
-//                }
             }
         }
     }
@@ -109,25 +103,36 @@ class PersonalFragment : Fragment() {
                 is WeeklyCaloriesUiState.Error -> {} // TODO
                 is WeeklyCaloriesUiState.Avail -> {
                     // 주간 칼로리 UI 갱신
-                    weeklyCaloriesUiState.weeklyCaloriesList[6].first // "6/23"
+                    val today = weeklyCaloriesUiState.weeklyCaloriesList[0].first // "6/23"
+                    Log.d("weeklyCaloriesList : Today", today.toString())
                     weeklyCaloriesUiState.weeklyCaloriesList[6].second // 745 (int 칼로리 값)
 
                     val entries = ArrayList<BarEntry>()
 
                     for (i in 0..6) {
                         Log.d(
-                            "weeklyCaloriesList",
-                            weeklyCaloriesUiState.weeklyCaloriesList[i].first.toString(),
+                            "weeklyCaloriesList1",
+                            "[$i] x : ${weeklyCaloriesUiState.weeklyCaloriesList[i].first}, " +
+                                "y : ${weeklyCaloriesUiState.weeklyCaloriesList[i].second}",
                         )
                     }
 
+                    Log.d("size", weeklyCaloriesUiState.weeklyCaloriesList.size.toString())
+
                     // 그래프 역순 정렬
-                    for (i in 6 downTo 0) {
+                    for (i in weeklyCaloriesUiState.weeklyCaloriesList.size - 1 downTo 0) {
                         entries.add(
                             BarEntry(
-                                weeklyCaloriesUiState.weeklyCaloriesList[i].first.toFloat(),
+                                (today - i).toFloat(),
                                 weeklyCaloriesUiState.weeklyCaloriesList[i].second.toFloat(),
                             ),
+                        )
+                    }
+
+                    for (i in 0..6) {
+                        Log.d(
+                            "weeklyCaloriesList2",
+                            "[$i] x : ${entries[i]}, ",
                         )
                     }
                     // 그래프 데이터 추가
@@ -161,8 +166,7 @@ class PersonalFragment : Fragment() {
         legend.textColor = Color.BLACK
 
         val xAxis = barChart.xAxis
-        xAxis.valueFormatter = GraphAxisValueFormatter()
-        /*  xAxis.valueFormatter = object : ValueFormatter() {
+        xAxis.valueFormatter = GraphAxisValueFormatter()/*  xAxis.valueFormatter = object : ValueFormatter() {
               override fun getFormattedValue(value: Float): String {
                   return "${value.toInt()}일"
               }
@@ -174,6 +178,11 @@ class PersonalFragment : Fragment() {
         xAxis.setDrawAxisLine(false)
 
         val yAxis = barChart.axisLeft
+        yAxis.valueFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+                return "${value.toInt()} kcal"
+            }
+        }
         yAxis.textColor = Color.BLACK
         yAxis.textSize = 11f
         yAxis.setDrawGridLines(false)
@@ -264,6 +273,13 @@ class PersonalFragment : Fragment() {
          yAxis.granularity = RANGE.get(1).get(range)*/
 
         lineChart.invalidate()
+    }
+
+    private fun animateProgressBar(progress: Int) {
+        val progressBar = binding.progressBar
+        val anim = AnimateProgressBar(progressBar, 0f, progress.toFloat())
+        anim.duration = 2000
+        progressBar.startAnimation(anim)
     }
 
     override fun onDestroyView() {
