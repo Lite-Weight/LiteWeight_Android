@@ -143,14 +143,12 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/left"
@@ -159,8 +157,7 @@
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/rectangle_radius16"
                     android:backgroundTint="@color/result_pink"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
+                    android:padding="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/middle"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -173,8 +170,8 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/left2x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="@+id/ttcarbo"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/ttcarbo"
@@ -183,10 +180,10 @@
                         android:layout_marginTop="5dp"
                         android:text="탄수화물"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@+id/txt_carbohydrate"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgleft" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txt_carbohydrate"
@@ -194,8 +191,7 @@
                         android:layout_height="wrap_content"
                         android:text="0.0 g"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ttcarbo" />
@@ -210,8 +206,7 @@
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/rectangle_radius16"
                     android:backgroundTint="@color/result_yellow"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
+                    android:padding="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/right"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -224,8 +219,8 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/middle3x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="@+id/ttprotein"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/ttprotein"
@@ -234,10 +229,10 @@
                         android:layout_marginTop="5dp"
                         android:text="단백질"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@+id/txt_protein"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgmiddle" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txt_protein"
@@ -245,8 +240,7 @@
                         android:layout_height="wrap_content"
                         android:text="0.0 g"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ttprotein" />
@@ -260,8 +254,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/rectangle_radius16"
                     android:backgroundTint="@color/result_skyblue"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
+                    android:padding="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -274,8 +267,8 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/right3x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="@+id/ttfat"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/ttfat"
@@ -284,10 +277,10 @@
                         android:layout_marginTop="5dp"
                         android:text="지방"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@+id/txt_fat"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgright" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txt_fat"
@@ -295,8 +288,7 @@
                         android:layout_height="wrap_content"
                         android:text="0.0 g"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ttfat" />
