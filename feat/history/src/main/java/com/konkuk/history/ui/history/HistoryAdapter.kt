@@ -1,8 +1,11 @@
 package com.konkuk.history.ui.history
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,17 +17,44 @@ class HistoryAdapter(
     private val onClick: (HistoryItemModel) -> Unit,
 ) : ListAdapter<HistoryItemModel, HistoryAdapter.ViewHolder>(diffUtil) {
 
+    private val colorList: List<String> =
+        listOf("#1C6BA4", "#F1E6EA", "#FAF0DB") // 파랑, 노랑, 초록 순서대로 색상 목록 생성
+
     inner class ViewHolder(val binding: HistoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SetTextI18n")
+        @SuppressLint("SetTextI18n", "ResourceAsColor")
         fun bind(data: HistoryItemModel) = with(binding) {
             root.setOnClickListener {
                 onClick(data)
             }
+            val colorIndex = adapterPosition % colorList.size // 아이템의 위치에 따라 색상 목록의 인덱스 계산
+            val itemColor = colorList[colorIndex] // 해당 인덱스의 색상 선택
 
-            timeLine.text = data.date.toDate("HH:mm") // data.date.toString() + "PM"
-            HistoryTime.text = data.date.toString()
+            HistoryItem.backgroundTintList = ColorStateList.valueOf(Color.parseColor(itemColor))
+            if (colorIndex == 0) {
+                HistoryTime.setTextColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        com.konkuk.common.R.color.white,
+                    ),
+                )
+                HistoryName.setTextColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        com.konkuk.common.R.color.white,
+                    ),
+                )
+                HistoryCarlorie.setTextColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        com.konkuk.common.R.color.white,
+                    ),
+                )
+            }
+
+            timeLine.text = data.date.toDate("HH") + "시" // data.date.toString() + "PM"
+            HistoryTime.text = data.date.toDate("HH:mm a")
             HistoryName.text = data.name
             HistoryCarlorie.text = data.calories.toString() + "kcal"
         }

@@ -345,9 +345,11 @@
                 android:visibility="gone" />
 
             <com.github.mikephil.charting.charts.BarChart
+                android:layout_marginTop="10dp"
                 android:id="@+id/barChart"
                 android:layout_width="match_parent"
-                android:layout_height="250dp" />
+                android:layout_height="250dp"
+                android:layout_marginHorizontal="24dp" />
 
             <View
                 android:layout_width="match_parent"
@@ -358,14 +360,31 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
                 android:text="오늘의 기록을 남겨주세요"
-                android:layout_gravity="center"
                 android:textColor="@color/text_for_black"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="24dp"
+                android:text="+ 버튼을 눌러 기록하세요"
+                android:textColor="@color/text_hint_gray"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bottomto"/>
 
         </LinearLayout>
 

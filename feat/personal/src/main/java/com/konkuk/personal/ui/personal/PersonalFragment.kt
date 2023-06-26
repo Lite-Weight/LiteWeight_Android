@@ -155,7 +155,7 @@ class PersonalFragment : Fragment() {
 
         val legend = barChart.legend
         legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
         legend.form = Legend.LegendForm.CIRCLE
         legend.formSize = 11f
         legend.textColor = Color.BLACK
