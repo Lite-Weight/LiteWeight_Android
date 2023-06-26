@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:text="이 날 기록이 없어요"
+                android:text="기록이 없어요"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:text="이 날의 기록이 없어요.\n 다른 날을 터치 해 보세요."
+                android:text="해당 하는 날짜의 기록이 없어요.\n 다른 날을 터치 해 보세요."
                 android:textAlignment="center"
                 android:textColor="#595959"
                 android:textSize="14sp" />
