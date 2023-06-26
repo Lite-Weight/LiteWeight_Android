@@ -29,6 +29,46 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="28dp"
-            android:layout_marginTop="46dp" />
+            android:layout_marginTop="46dp"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/sorrydog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/sorrydog" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="이 날 기록이 없어요"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="이 날의 기록이 없어요.\n 다른 날을 터치 해 보세요."
+                android:textAlignment="center"
+                android:textColor="#595959"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
     </LinearLayout>
 </layout>
