@@ -104,7 +104,14 @@ class HistoryFragment : Fragment() {
             is HistoryListUiState.Uninitialized -> {}
             is HistoryListUiState.Error -> {}
             is HistoryListUiState.Avail -> {
-                historyAdapter.submitList(historyListUiState.list)
+                if (historyListUiState.list.isEmpty()) {
+                    historyRecyclerView.visibility = View.GONE
+                    sorrydog.visibility = View.VISIBLE
+                } else {
+                    historyRecyclerView.visibility = View.VISIBLE
+                    sorrydog.visibility = View.GONE
+                    historyAdapter.submitList(historyListUiState.list)
+                }
             }
         }
     }

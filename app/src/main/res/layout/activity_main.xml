@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@color/stroke_deepblue"
+            android:backgroundTint="@color/main_blue"
             android:contentDescription="@string/main_camera_button"
             android:onClick="@{() -> vm.onCaptureClick()}"
             app:tint="@color/white"

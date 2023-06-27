@@ -16,5 +16,7 @@
     <color name="result_yellow">#FAF0DB</color>
     <color name="result_skyblue">#E3EDF7</color>
     <color name="text_for_black">#2A4067</color>
+    <color name="history_whiteText">#B0CBDF</color>
+    <color name="history_blackText">#5C5C60</color>
 
 </resources>

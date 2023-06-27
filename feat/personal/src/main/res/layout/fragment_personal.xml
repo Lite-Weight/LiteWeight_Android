@@ -6,18 +6,19 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/back_white"
+        android:background="@color/white"
         tools:context=".ui.personal.PersonalFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp">
 
                 <ImageView
                     android:id="@+id/img_icon"
@@ -44,6 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="20dp"
                 android:text="영양소 전체"
                 android:textColor="@color/text_for_black"
@@ -52,18 +54,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="15dp"
                 android:text="오늘 이만큼 먹었어요"
                 android:textColor="@color/text_for_black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="96dp"
-                android:layout_marginTop="28dp"
-                android:background="@drawable/rectangle_radius16"
-                android:backgroundTint="@color/light_blue">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="9dp"
+                android:background="@drawable/rectangle_shadow_png"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/img_light"
@@ -143,25 +152,34 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:text="3대 영양소"
+                android:textColor="@color/text_for_black"
+                android:textSize="12sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/left"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/rectangle_radius16"
                     android:backgroundTint="@color/result_pink"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
+                    android:padding="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="9:7"
                     app:layout_constraintEnd_toStartOf="@+id/middle"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintHorizontal_weight="1"
@@ -173,8 +191,8 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/left2x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="@+id/ttcarbo"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/ttcarbo"
@@ -183,18 +201,18 @@
                         android:layout_marginTop="5dp"
                         android:text="탄수화물"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@+id/txt_carbohydrate"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgleft" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txt_carbohydrate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.0 g"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textColor="@color/text_for_black"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -206,13 +224,13 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/middle"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="20dp"
                     android:background="@drawable/rectangle_radius16"
                     android:backgroundTint="@color/result_yellow"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
+                    android:padding="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="9:7"
                     app:layout_constraintEnd_toStartOf="@+id/right"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintHorizontal_weight="1"
@@ -224,8 +242,8 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/middle3x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="@+id/ttprotein"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/ttprotein"
@@ -234,18 +252,18 @@
                         android:layout_marginTop="5dp"
                         android:text="단백질"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@+id/txt_protein"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgmiddle" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txt_protein"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.0 g"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textColor="@color/text_for_black"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -257,12 +275,12 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/right"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:background="@drawable/rectangle_radius16"
                     android:backgroundTint="@color/result_skyblue"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
+                    android:padding="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="9:7"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintHorizontal_weight="1"
@@ -274,8 +292,8 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/right3x"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintBottom_toBottomOf="@+id/ttfat"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/ttfat"
@@ -284,18 +302,18 @@
                         android:layout_marginTop="5dp"
                         android:text="지방"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toTopOf="@+id/txt_fat"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgright" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txt_fat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.0 g"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textColor="@color/text_for_black"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -313,6 +331,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="20dp"
                 android:text="이번주 이만큼 먹었어요"
                 android:textColor="@color/text_for_black"
                 android:textSize="24sp"
@@ -321,9 +341,50 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/line_chart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="20dp" />
+                android:layout_height="250dp"
+                android:visibility="gone" />
 
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_marginTop="10dp"
+                android:id="@+id/barChart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginHorizontal="24dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/back_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="20dp"
+                android:text="오늘의 기록을 남겨주세요"
+                android:textColor="@color/text_for_black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="24dp"
+                android:text="+ 버튼을 눌러 기록하세요"
+                android:textColor="@color/text_hint_gray"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginBottom="36dp"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bottomto"/>
 
         </LinearLayout>
 
