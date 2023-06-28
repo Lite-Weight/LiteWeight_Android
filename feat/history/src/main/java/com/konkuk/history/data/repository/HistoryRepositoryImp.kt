@@ -1,5 +1,6 @@
 package com.konkuk.history.data.repository
 
+import com.konkuk.common.data.FoodInfo
 import com.konkuk.history.data.datasource.HistoryDataSource
 import com.konkuk.history.domain.model.HistoryItemModel
 import com.konkuk.history.domain.repository.HistoryRepository
@@ -15,5 +16,9 @@ class HistoryRepositoryImp @Inject constructor(
         selectedDay: Int,
     ): Result<Flow<List<HistoryItemModel>>> {
         return historyDataSource.getFoodHistory(year, month, selectedDay)
+    }
+
+    override suspend fun getFoodInfo(id: Long): Result<FoodInfo> {
+        return historyDataSource.getFoodInfo(id)
     }
 }
