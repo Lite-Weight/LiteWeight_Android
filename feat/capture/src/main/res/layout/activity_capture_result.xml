@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="결과"
+                android:text="@{vm.foodInfo.name}"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
