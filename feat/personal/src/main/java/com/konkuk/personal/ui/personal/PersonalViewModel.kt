@@ -85,7 +85,13 @@ class PersonalViewModel @Inject constructor(
                                             calories,
                                         ),
                                     )
-                                }.apply { repeat(6) { add(Pair(0, 0)) } },
+                                }.apply {
+                                    addAll(
+                                        (_uiState.value.weeklyCaloriesUiState as? WeeklyCaloriesUiState.Avail)
+                                            ?.weeklyCaloriesList?.subList(1, 7)
+                                            ?: List(6) { Pair(0, 0) },
+                                    )
+                                },
                             ),
                         )
                 }
