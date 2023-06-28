@@ -2,7 +2,9 @@ package com.konkuk.history.ui.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.konkuk.common.data.FoodInfo
 import com.konkuk.history.domain.model.HistoryCalendarModel
+import com.konkuk.history.domain.usecase.GetFoodInfoByIdUseCase
 import com.konkuk.history.domain.usecase.GetHistoryDateUseCase
 import com.konkuk.history.domain.usecase.GetHistoryListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +23,7 @@ import javax.inject.Inject
 class HistoryViewModel @Inject constructor(
     private val getHistoryDateUseCase: GetHistoryDateUseCase,
     private val getHistoryListUseCase: GetHistoryListUseCase,
+    private val getFoodInfoByIdUseCase: GetFoodInfoByIdUseCase,
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow(HistoryUiState())
@@ -97,7 +100,8 @@ class HistoryViewModel @Inject constructor(
                     selectedDay = selectedDay,
                     calendarList = (_uiState.value.historyDateUiState as HistoryDateUiState.Avail).calendarList.toMutableList()
                         .apply {
-                            this[beforeSelected - 1] = this[beforeSelected - 1].copy(isSelected = false)
+                            this[beforeSelected - 1] =
+                                this[beforeSelected - 1].copy(isSelected = false)
                             this[selectedDay - 1] = this[selectedDay - 1].copy(isSelected = true)
                         },
                 ),
@@ -122,6 +126,14 @@ class HistoryViewModel @Inject constructor(
                 _uiState.value = _uiState.value.copy(
                     historyListUiState = HistoryListUiState.Error(it.message.toString()),
                 )
+            }
+        }
+    }
+
+    fun getFoodInfo(id: Long, onGetSuccess: (FoodInfo) -> Unit) {
+        viewModelScope.launch {
+            getFoodInfoByIdUseCase(id).onSuccess { foodInfo ->
+                onGetSuccess(foodInfo)
             }
         }
     }

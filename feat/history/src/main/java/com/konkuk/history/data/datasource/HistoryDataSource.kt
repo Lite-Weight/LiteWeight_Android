@@ -22,4 +22,8 @@ class HistoryDataSource @Inject constructor(private val foodInfoDao: FoodInfoDao
             }
         }
     }
+
+    suspend fun getFoodInfo(id: Long): Result<FoodInfo> {
+        return kotlin.runCatching { foodInfoDao.getFoodInfo(id) }
+    }
 }

@@ -11,6 +11,9 @@ interface FoodInfoDao {
     @Query("SELECT * FROM foodInfo")
     fun getAll(): Flow<List<FoodInfo>>
 
+    @Query("SELECT * FROM foodInfo WHERE id = :id")
+    suspend fun getFoodInfo(id: Long): FoodInfo
+
     @Insert
     suspend fun insert(foodInfo: FoodInfo)
 

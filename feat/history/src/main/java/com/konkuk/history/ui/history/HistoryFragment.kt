@@ -1,5 +1,6 @@
 package com.konkuk.history.ui.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.konkuk.capture.ui.result.CaptureResultActivity
+import com.konkuk.capture.ui.result.CaptureResultViewModel
 import com.konkuk.common.ui.decoration.FirstItemDecoration
 import com.konkuk.history.databinding.FragmentHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,7 +58,17 @@ class HistoryFragment : Fragment() {
             LinearLayoutManager.VERTICAL,
             false,
         )
-        historyAdapter = HistoryAdapter { _ ->
+        historyAdapter = HistoryAdapter { historyItemModel ->
+            viewModel.getFoodInfo(historyItemModel.id) { foodInfo ->
+                startActivity(
+                    Intent(requireContext(), CaptureResultActivity::class.java).apply {
+                        putExtra(
+                            CaptureResultViewModel.FOOD_INFO_KEY,
+                            foodInfo,
+                        )
+                    },
+                )
+            }
         }
         historyRecyclerView.adapter = historyAdapter
     }

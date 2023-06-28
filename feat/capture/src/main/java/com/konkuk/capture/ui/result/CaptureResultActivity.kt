@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CaptureResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCaptureResultBinding
-    private val viewModel by viewModels<CaptureResultViewModel>()
+    private val viewModel: CaptureResultViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

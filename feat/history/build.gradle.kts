@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":feat:capture"))
 
     // Android
     implementation(AndroidX.CORE_KTX)
