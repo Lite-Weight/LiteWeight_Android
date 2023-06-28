@@ -94,10 +94,10 @@
                 android:layout_marginTop="20dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginEnd="10dp"
                     android:id="@+id/left"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/rectangle_roundfull"
                     android:backgroundTint="@color/result_pink"
                     android:paddingHorizontal="20dp"
@@ -145,10 +145,10 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginEnd="10dp"
                     android:id="@+id/middle"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/rectangle_roundfull"
                     android:backgroundTint="@color/result_yellow"
                     android:paddingHorizontal="20dp"
