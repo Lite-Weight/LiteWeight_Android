@@ -90,14 +90,14 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="96dp"
                 android:layout_marginTop="20dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginEnd="10dp"
                     android:id="@+id/left"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
+                    android:layout_height="0dp"
                     android:background="@drawable/rectangle_roundfull"
                     android:backgroundTint="@color/result_pink"
                     android:paddingHorizontal="20dp"
@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{@string/g_unit(vm.foodInfo.carbohydrates)}"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -145,10 +145,10 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginEnd="10dp"
                     android:id="@+id/middle"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="10dp"
+                    android:layout_height="0dp"
                     android:background="@drawable/rectangle_roundfull"
                     android:backgroundTint="@color/result_yellow"
                     android:paddingHorizontal="20dp"
@@ -186,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{@string/g_unit(vm.foodInfo.protein)}"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -198,7 +198,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/right"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:background="@drawable/rectangle_roundfull"
                     android:backgroundTint="@color/result_skyblue"
                     android:paddingHorizontal="20dp"
@@ -236,7 +236,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{@string/g_unit(vm.foodInfo.fat)}"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
