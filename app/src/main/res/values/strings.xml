@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LiteWeight_Android</string>
+    <string name="app_name">LiteWeight</string>
     <string name="history_nav_title">History</string>
     <string name="personal_nav_title">Personal</string>
     <string name="main_camera_button">사진 찍기 버튼</string>
