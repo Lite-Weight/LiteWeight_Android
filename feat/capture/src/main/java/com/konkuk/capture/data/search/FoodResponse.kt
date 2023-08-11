@@ -1,5 +1,6 @@
 package com.konkuk.capture.data.search
 
+import com.konkuk.common.data.FoodInfo
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,4 +22,19 @@ data class FoodResponse(
     @SerialName("NUTR_CONT7") val cholesterol: Double = 0.0,
     @SerialName("NUTR_CONT8") val saturatedFat: Double = 0.0,
     @SerialName("NUTR_CONT9") val transFat: Double = 0.0,
+)
+
+fun FoodResponse.toFoodInfo() = FoodInfo(
+    0L,
+    name,
+    System.currentTimeMillis(),
+    carbohydrates.toFloat(),
+    sodium.toFloat(),
+    sugar.toFloat(),
+    cholesterol.toFloat(),
+    transFat.toFloat(),
+    saturatedFat.toFloat(),
+    protein.toFloat(),
+    fat.toFloat(),
+    calories.toFloat(),
 )
