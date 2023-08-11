@@ -6,6 +6,7 @@ object Versions {
     const val COMPILE_SDK_VERSION = 33
     const val MIN_SDK_VERSION = 26
     const val TARGET_SDK_VERSION = 33
+    const val SERIALIZATION_JSON = "1.5.1"
 
     // AndroidX
     const val CORE_KTX = "1.10.0"
@@ -39,6 +40,7 @@ object Versions {
 
 object Kotlin {
     const val KOTLIN_STDLIB = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN_VERSION}"
+    const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.SERIALIZATION_JSON}"
 }
 
 object AndroidX {

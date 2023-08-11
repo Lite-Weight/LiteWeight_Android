@@ -67,6 +67,9 @@ dependencies {
 
     // OCR
     implementation(MLKIT.TEXT_RECOGNITION)
+
+    // Serialization
+    implementation(Kotlin.SERIALIZATION)
 }
 
 kapt {
