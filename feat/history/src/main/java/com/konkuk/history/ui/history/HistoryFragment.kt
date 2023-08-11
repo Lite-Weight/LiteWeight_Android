@@ -51,10 +51,10 @@ class HistoryFragment : Fragment() {
         observeUiState()
         initRecyclerView()
         initHistoryRecyclerView()
-        NextBtn()
+        initNextBtn()
     }
 
-    private fun NextBtn() {
+    private fun initNextBtn() {
         binding.nextButton.setOnClickListener {
             val intent = Intent(requireContext(), HistoryStatisticsActivity::class.java)
             startActivity(intent)
