@@ -13,6 +13,7 @@ object Versions {
     const val APP_COMPAT = "1.6.1"
     const val CONSTRAINT_LAYOUT = "2.1.4"
     const val NAVIGATION = "2.5.3"
+    const val PAGING3 = "3.1.1"
 
     // Android
     const val MATERIAL = "1.8.0"
@@ -68,6 +69,9 @@ object AndroidX {
     const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
     const val ROOM_COMPLIER = "androidx.room:room-compiler:${Versions.ROOM}"
     const val ROOM_KTX = "androidx.room:room-ktx:${Versions.ROOM}"
+
+    // Pagging
+    const val PAGING3 = "androidx.paging:paging-runtime:${Versions.PAGING3}"
 }
 
 object Material {

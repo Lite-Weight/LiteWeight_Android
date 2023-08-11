@@ -77,6 +77,9 @@ dependencies {
     implementation(NETWORK.CONVERTER)
     implementation(NETWORK.OKHTTP)
     implementation(NETWORK.OKHTTP_INTERCEPTOR)
+
+    // Paging
+    implementation(AndroidX.PAGING3)
 }
 
 kapt {
