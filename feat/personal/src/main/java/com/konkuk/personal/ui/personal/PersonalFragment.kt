@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.konkuk.common.ui.decoration.AnimateProgressBarCommon
 import com.konkuk.personal.databinding.FragmentPersonalBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -273,7 +274,7 @@ class PersonalFragment : Fragment() {
 
     private fun animateProgressBar(progress: Int) {
         val progressBar = binding.progressBar
-        val anim = AnimateProgressBar(progressBar, 0f, progress.toFloat())
+        val anim = AnimateProgressBarCommon(progressBar, 0f, progress.toFloat())
         anim.duration = 1500
         progressBar.startAnimation(anim)
     }
