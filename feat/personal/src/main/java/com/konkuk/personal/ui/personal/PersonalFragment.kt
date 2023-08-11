@@ -120,7 +120,7 @@ class PersonalFragment : Fragment() {
                     for (i in weeklyCaloriesUiState.weeklyCaloriesList.size - 1 downTo 0) {
                         entries.add(
                             BarEntry(
-                                (today - i).toFloat(),
+                                weeklyCaloriesUiState.weeklyCaloriesList[i].first.toFloat(),
                                 weeklyCaloriesUiState.weeklyCaloriesList[i].second.toFloat(),
                             ),
                         )

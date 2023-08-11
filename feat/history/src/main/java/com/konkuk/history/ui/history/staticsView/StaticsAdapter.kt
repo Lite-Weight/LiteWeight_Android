@@ -43,9 +43,6 @@ class StaticsAdapter(
                 txtAbout.text = "${data.avgAge}살 남성에 비해 ${calculate}${data.foodUnit} 덜 먹었어요"
             }
 
-            // progressBar 애니메이션 설정
-            animateProgressBar(progressBar, data.avgCalorie)
-
             // progressBarPersonal 애니메이션 설정
             animateProgressBar(
                 progressBarPersonal,
@@ -56,7 +53,7 @@ class StaticsAdapter(
 
     private fun animateProgressBar(progressBar: ProgressBar, progress: Int) {
         val anim = AnimateProgressBarCommon(progressBar, 0f, progress.toFloat())
-        anim.duration = 1500
+        anim.duration = 1800
         progressBar.startAnimation(anim)
     }
 

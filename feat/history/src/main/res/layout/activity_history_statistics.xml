@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="7월 12일의 분석"
+                    android:text="{7월 12일}의 분석"
                     android:textColor="@color/black"
                     android:textSize="21sp"
                     app:layout_constraintBottom_toBottomOf="parent"
