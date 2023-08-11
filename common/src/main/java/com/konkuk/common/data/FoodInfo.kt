@@ -20,4 +20,5 @@ data class FoodInfo(
     val protein: Float,
     val fat: Float,
     val calories: Float,
+    val weight: Int = 0,
 ) : Parcelable

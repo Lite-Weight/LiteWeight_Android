@@ -22,6 +22,7 @@ data class FoodResponse(
     @SerialName("NUTR_CONT7") val cholesterol: Double = 0.0,
     @SerialName("NUTR_CONT8") val saturatedFat: Double = 0.0,
     @SerialName("NUTR_CONT9") val transFat: Double = 0.0,
+    @SerialName("SERVING_WT") val weight: Int = 0,
 )
 
 fun FoodResponse.toFoodInfo() = FoodInfo(
@@ -37,4 +38,5 @@ fun FoodResponse.toFoodInfo() = FoodInfo(
     protein.toFloat(),
     fat.toFloat(),
     calories.toFloat(),
+    weight,
 )
