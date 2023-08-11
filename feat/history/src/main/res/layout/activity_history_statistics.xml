@@ -54,7 +54,7 @@
                 android:paddingHorizontal="25dp"
                 android:text="Overview"
                 android:textColor="@color/text_for_black"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -74,8 +74,8 @@
 
                     <ImageView
                         android:id="@+id/img_gender"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@drawable/male" />
 
                     <TextView
@@ -84,7 +84,7 @@
                         android:layout_marginTop="9dp"
                         android:text="GENDER"
                         android:textColor="#435B71"
-                        android:textSize="13sp"
+                        android:textSize="9sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -94,7 +94,7 @@
                         android:layout_marginTop="3dp"
                         android:text="남성"
                         android:textColor="@color/main_blue"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
