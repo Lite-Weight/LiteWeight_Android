@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#0E1012</color>
+    <color name="black">#002140</color>
     <color name="white">#FFFFFFFF</color>
     <color name="back_white">#FBFDFF</color>
     <color name="main_blue">#0080FF</color>
@@ -18,5 +18,6 @@
     <color name="text_for_black">#2A4067</color>
     <color name="history_whiteText">#B0CBDF</color>
     <color name="history_blackText">#5C5C60</color>
+    <color name="static_gray">#8D94A0</color>
 
 </resources>
