@@ -50,6 +50,12 @@ class HistoryFragment : Fragment() {
         observeUiState()
         initRecyclerView()
         initHistoryRecyclerView()
+        NextBtn()
+    }
+
+    private fun NextBtn() {
+        val intent = Intent(requireContext(), HistoryStatisticsActivity::class.java)
+        startActivity(intent)
     }
 
     private fun initHistoryRecyclerView() = with(binding) {

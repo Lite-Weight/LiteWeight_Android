@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".ui.history.HIstoryStatisticsActivity"
+            android:name=".ui.history.HistoryStatisticsActivity"
             android:exported="false" />
     </application>
 
