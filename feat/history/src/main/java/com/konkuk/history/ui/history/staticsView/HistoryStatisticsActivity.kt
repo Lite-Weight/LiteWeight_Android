@@ -27,6 +27,13 @@ class HistoryStatisticsActivity : AppCompatActivity() {
 
         initData()
         initRecyclerView()
+        initBack()
+    }
+
+    private fun initBack() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -55,7 +62,6 @@ class HistoryStatisticsActivity : AppCompatActivity() {
         }*/
 
     private fun initRecyclerView() = with(binding) {
-        // 기존 adapter(recyclerview adpater)
         rvHistoryStatistics.layoutManager = LinearLayoutManager(
             this@HistoryStatisticsActivity,
             LinearLayoutManager.VERTICAL,

@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingVertical="28dp">
+            android:paddingVertical="18dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,9 +24,11 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/img_icon"
+                    android:id="@+id/btn_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="10dp"
                     android:src="@drawable/backsvg"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:layout_marginTop="31dp"
+                android:layout_marginTop="21dp"
                 android:paddingHorizontal="25dp"
                 android:text="Overview"
                 android:textColor="@color/text_for_black"
@@ -113,8 +115,8 @@
 
                     <ImageView
                         android:id="@+id/img_age"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@drawable/age" />
 
                     <TextView
@@ -123,7 +125,7 @@
                         android:layout_marginTop="9dp"
                         android:text="AGE"
                         android:textColor="#435B71"
-                        android:textSize="13sp"
+                        android:textSize="9sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -133,7 +135,7 @@
                         android:layout_marginTop="3dp"
                         android:text="12 ~ 18살"
                         android:textColor="@color/main_blue"
-                        android:textSize="14sp"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -149,8 +151,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_history_statistics"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-             />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </ScrollView>
