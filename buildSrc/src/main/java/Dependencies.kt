@@ -40,6 +40,7 @@ object Versions {
     // Network
     const val RETROFIT = "2.9.0"
     const val OKHTTP = "4.10.0"
+    const val SERIALIZATION_CONVERTER = "1.0.0"
 }
 
 object Kotlin {
@@ -99,6 +100,7 @@ object MPCHART {
 object NETWORK {
     // Retrofit
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+    const val CONVERTER = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.SERIALIZATION_CONVERTER}"
     const val OKHTTP = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
     const val OKHTTP_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
 }

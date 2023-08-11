@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -73,6 +74,7 @@ dependencies {
 
     // Network
     implementation(NETWORK.RETROFIT)
+    implementation(NETWORK.CONVERTER)
     implementation(NETWORK.OKHTTP)
     implementation(NETWORK.OKHTTP_INTERCEPTOR)
 }
