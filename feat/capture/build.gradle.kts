@@ -70,6 +70,11 @@ dependencies {
 
     // Serialization
     implementation(Kotlin.SERIALIZATION)
+
+    // Network
+    implementation(NETWORK.RETROFIT)
+    implementation(NETWORK.OKHTTP)
+    implementation(NETWORK.OKHTTP_INTERCEPTOR)
 }
 
 kapt {
