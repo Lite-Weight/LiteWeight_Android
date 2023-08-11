@@ -32,6 +32,9 @@ object Versions {
 
     // MLKIT
     const val TEXT_RECOGNITION = "16.0.0"
+
+    // MPChart
+    const val MPCHART = "v3.1.0"
 }
 
 object Kotlin {
@@ -81,4 +84,8 @@ object DI {
 
 object MLKIT {
     const val TEXT_RECOGNITION = "com.google.mlkit:text-recognition-korean:${Versions.TEXT_RECOGNITION}"
+}
+
+object MPCHART {
+    const val GRAPH = "com.github.PhilJay:MPAndroidChart:${Versions.MPCHART}"
 }
