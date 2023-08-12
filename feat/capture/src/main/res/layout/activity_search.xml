@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.konkuk.capture.ui.search.SearchFoodViewModel" />
@@ -18,10 +19,11 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_margin="12dp"
+            android:padding="4dp"
             android:src="@drawable/backbtn"
-            android:tint="@color/text_hint_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_gray"
             tools:ignore="UseAppTint" />
 
         <EditText
@@ -29,22 +31,25 @@
             android:layout_height="0dp"
             android:background="@null"
             android:imeOptions="actionDone"
+            android:inputType="text"
             android:maxLines="1"
-            android:onTextChanged="@{(s, i1, i2, i3) -> vm.searchFoodName(s)}"
+            android:paddingHorizontal="12dp"
+            android:text="@={vm.textField}"
             app:layout_constraintBottom_toBottomOf="@id/btn_back"
             app:layout_constraintEnd_toStartOf="@id/btn_search"
             app:layout_constraintStart_toEndOf="@id/btn_back"
             app:layout_constraintTop_toTopOf="@id/btn_back" />
 
         <ImageView
+            android:onClick="@{() -> vm.removeText()}"
             android:id="@+id/btn_search"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_margin="12dp"
-            android:src="@drawable/btn_search"
+            android:src="@drawable/baseline_clear_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/text_hint_gray" />
+            app:tint="@color/text_gray" />
 
         <View
             android:id="@+id/search_underline"
@@ -68,11 +73,11 @@
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/rv_foodlist"
+            android:background="@drawable/rounded_top_corner_shape"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/rounded_top_corner_shape"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_foodlist" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tv_progress"
@@ -82,10 +87,10 @@
             android:background="@drawable/btn_customfull"
             android:backgroundTint="@color/white"
             android:foreground="?attr/selectableItemBackground"
+            android:onClick="@{() -> vm.enroll()}"
             android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{() -> vm.enroll()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_foodlist">
 

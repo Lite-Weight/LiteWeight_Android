@@ -66,6 +66,10 @@ class SearchFoodActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun handleEvent(foodInfo: FoodInfo?) {

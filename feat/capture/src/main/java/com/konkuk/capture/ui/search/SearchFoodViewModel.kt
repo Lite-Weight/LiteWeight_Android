@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,8 +26,18 @@ class SearchFoodViewModel @Inject constructor(
     private val _event = MutableSharedFlow<FoodInfo?>()
     val event get() = _event.asSharedFlow()
 
-    fun searchFoodName(name: CharSequence) {
-        _foodList.value = searchFoodNameUseCase(name.toString())
+    val textField = MutableStateFlow("")
+
+    init {
+        viewModelScope.launch {
+            textField.debounce(300).collectLatest {
+                _foodList.value = searchFoodNameUseCase(it)
+            }
+        }
+    }
+
+    fun removeText() {
+        textField.value = ""
     }
 
     fun enroll() {
