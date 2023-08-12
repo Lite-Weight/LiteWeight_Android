@@ -66,12 +66,14 @@
                 android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:paddingHorizontal="25dp">
 
                 <LinearLayout
+                    android:onClick="@{() -> vm.changeGender()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

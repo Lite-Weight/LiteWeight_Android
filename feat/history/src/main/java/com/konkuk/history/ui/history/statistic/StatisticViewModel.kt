@@ -131,6 +131,14 @@ class StatisticViewModel @Inject constructor(
         }
     }
 
+    fun changeAge(age: Int) {
+        if (age > 0) _age.value = age
+    }
+
+    fun changeGender() {
+        _gender.value = if (gender.value == GENDER.MALE) GENDER.FEMALE else GENDER.MALE
+    }
+
     companion object {
         const val SELECTED_DAY_KEY = "SELECTED_DAY_KEY"
     }
