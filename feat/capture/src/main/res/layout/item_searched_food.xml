@@ -7,6 +7,10 @@
         <variable
             name="item"
             type="com.konkuk.common.data.FoodInfo" />
+
+        <variable
+            name="vm"
+            type="com.konkuk.capture.ui.search.SearchFoodViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,14 +21,17 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="28dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@{item.name}"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tv_calories"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="삼양라면" />
@@ -45,7 +52,7 @@
             android:id="@+id/tv_calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Integer.toString(item.calories)}"
+            android:text="@{String.format(&quot;%.1f&quot;, Float.valueOf(item.calories)/10.0f)}"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_calories_unit"

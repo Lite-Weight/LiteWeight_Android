@@ -10,7 +10,7 @@ import javax.inject.Inject
 class SearchFoodRepository @Inject constructor(private val searchFoodDatasource: SearchFoodDataSource) {
     fun getSearchedItems(name: String): Flow<PagingData<FoodInfo>> {
         return Pager(
-            config = PagingConfig(pageSize = 10, enablePlaceholders = true),
+            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
             pagingSourceFactory = { loadSearchedFoodItemsPage(name) },
         )
             .flow

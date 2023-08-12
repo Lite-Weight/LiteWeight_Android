@@ -1,42 +1,59 @@
 package com.konkuk.capture.data.search
 
+import android.util.Log
+import com.google.gson.annotations.SerializedName
 import com.konkuk.common.data.FoodInfo
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class FoodsResponse(
-    @SerialName("pageNo") val pageNo: Int = 1,
-    @SerialName("items") val items: List<FoodResponse> = emptyList(),
+    val header: Header,
+    val body: FoodsResponseBody,
+)
+
+@Serializable
+data class Header(
+    val resultCode: String,
+    val resultMsg: String,
+)
+
+@Serializable
+data class FoodsResponseBody(
+    val pageNo: Int,
+    val totalCount: Int,
+    val numOfRows: Int,
+    val items: List<FoodResponse>,
 )
 
 @Serializable
 data class FoodResponse(
-    @SerialName("DESC_KOR") val name: String = "",
-    @SerialName("NUTR_CONT1") val calories: Double = 0.0,
-    @SerialName("NUTR_CONT2") val carbohydrates: Double = 0.0,
-    @SerialName("NUTR_CONT3") val protein: Double = 0.0,
-    @SerialName("NUTR_CONT4") val fat: Double = 0.0,
-    @SerialName("NUTR_CONT5") val sugar: Double = 0.0,
-    @SerialName("NUTR_CONT6") val sodium: Double = 0.0,
-    @SerialName("NUTR_CONT7") val cholesterol: Double = 0.0,
-    @SerialName("NUTR_CONT8") val saturatedFat: Double = 0.0,
-    @SerialName("NUTR_CONT9") val transFat: Double = 0.0,
-    @SerialName("SERVING_WT") val weight: Int = 0,
+    @SerializedName("DESC_KOR") val name: String?,
+    @SerializedName("SERVING_WT") val weight: String?,
+    @SerializedName("NUTR_CONT1") val calories: String?,
+    @SerializedName("NUTR_CONT2") val carbohydrates: String?,
+    @SerializedName("NUTR_CONT3") val protein: String?,
+    @SerializedName("NUTR_CONT4") val fat: String?,
+    @SerializedName("NUTR_CONT5") val sugar: String?,
+    @SerializedName("NUTR_CONT6") val sodium: String?,
+    @SerializedName("NUTR_CONT7") val cholesterol: String?,
+    @SerializedName("NUTR_CONT8") val saturatedFat: String?,
+    @SerializedName("NUTR_CONT9") val transFat: String?,
+    @SerializedName("BGN_YEAR") val BGN_YEAR: String?,
+    @SerializedName("ANIMAL_PLANT") val ANIMAL_PLANT: String?,
 )
 
 fun FoodResponse.toFoodInfo() = FoodInfo(
     0L,
-    name,
+    name ?: "",
     System.currentTimeMillis(),
-    carbohydrates.toFloat(),
-    sodium.toFloat(),
-    sugar.toFloat(),
-    cholesterol.toFloat(),
-    transFat.toFloat(),
-    saturatedFat.toFloat(),
-    protein.toFloat(),
-    fat.toFloat(),
-    calories.toFloat(),
-    weight,
-)
+    carbohydrates?.toFloatOrNull() ?: 0f,
+    sodium?.toFloatOrNull() ?: 0f,
+    sugar?.toFloatOrNull() ?: 0f,
+    cholesterol?.toFloatOrNull() ?: 0f,
+    transFat?.toFloatOrNull() ?: 0f,
+    saturatedFat?.toFloatOrNull() ?: 0f,
+    protein?.toFloatOrNull() ?: 0f,
+    fat?.toFloatOrNull() ?: 0f,
+    calories?.toFloatOrNull() ?: 0f,
+    weight?.toIntOrNull() ?: 0,
+).apply { Log.d("FoodResponse", this.toString()) }

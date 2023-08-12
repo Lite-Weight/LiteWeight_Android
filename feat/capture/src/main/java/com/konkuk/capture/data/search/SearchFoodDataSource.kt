@@ -7,10 +7,12 @@ class SearchFoodDataSource @Inject constructor(private val searchFoodService: Se
     suspend fun searchFood(name: String, pageNo: Int): Result<List<FoodInfo>> {
         val searchName = name.trim()
         if (searchName.isBlank()) return Result.success(emptyList())
-        return kotlin.runCatching {
-            requireNotNull(
-                searchFoodService.searchFoodService(searchName, pageNo).body(),
-            ).items.map { it.toFoodInfo() }
+        kotlin.runCatching {
+            val response = searchFoodService.searchFoodService(searchName, pageNo)
+            if (response.isSuccessful) {
+                return Result.success(requireNotNull(response.body()).body.items.map { it.toFoodInfo() })
+            }
         }
+        return Result.success(emptyList())
     }
 }

@@ -14,6 +14,7 @@ class SearchFoodPagingSource(
         kotlin.runCatching {
             val pageNo = params.key ?: 1
             searchFoodDataSource.searchFood(name, pageNo).onSuccess { items ->
+                if (items.isEmpty()) return LoadResult.Error(IllegalStateException("아이탬 끝"))
                 return LoadResult.Page(
                     data = items,
                     prevKey = null, // Only paging forward.
@@ -24,5 +25,10 @@ class SearchFoodPagingSource(
         return LoadResult.Error(IllegalStateException("검색 결과 오류 발생"))
     }
 
-    override fun getRefreshKey(state: PagingState<Int, FoodInfo>) = null
+    override fun getRefreshKey(state: PagingState<Int, FoodInfo>): Int? {
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+        }
+    }
 }

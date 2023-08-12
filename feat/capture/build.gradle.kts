@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -17,6 +19,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "DATA_API_KEY", gradleLocalProperties(rootDir).getProperty("data.api.key"))
     }
 
     buildTypes {
@@ -74,7 +78,8 @@ dependencies {
 
     // Network
     implementation(NETWORK.RETROFIT)
-    implementation(NETWORK.CONVERTER)
+    // implementation(NETWORK.KOTLIN_CONVERTER)
+    implementation(NETWORK.GSON_CONVERTER)
     implementation(NETWORK.OKHTTP)
     implementation(NETWORK.OKHTTP_INTERCEPTOR)
 

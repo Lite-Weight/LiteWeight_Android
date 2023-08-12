@@ -1,6 +1,6 @@
 package com.konkuk.capture.di
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.google.gson.Gson
 import com.konkuk.capture.data.search.API
 import com.konkuk.capture.data.search.SearchFoodService
 import dagger.Module
@@ -9,10 +9,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -39,7 +39,7 @@ class NetworkModule {
     @Singleton
     fun provideInterceptor(): Interceptor {
         return Interceptor { chain ->
-            val newRequest = chain.request().newBuilder() // add header
+            val newRequest = chain.request().newBuilder().header("Content-Type", API.CONTENT_TYPE)
                 .build()
             chain.proceed(newRequest)
         }
@@ -51,13 +51,17 @@ class NetworkModule {
         val json = Json {
             ignoreUnknownKeys = true
             encodeDefaults = true
+            prettyPrint = true
+            isLenient = true
+            coerceInputValues = true
         }
 
         return Retrofit.Builder()
             .baseUrl(API.BASE_URL)
             .client(client)
             .addConverterFactory(
-                json.asConverterFactory(API.CONTENT_TYPE.toMediaType()),
+                GsonConverterFactory.create(Gson()),
+                // json.asConverterFactory(API.CONTENT_TYPE.toMediaType()),
             )
             .build()
     }

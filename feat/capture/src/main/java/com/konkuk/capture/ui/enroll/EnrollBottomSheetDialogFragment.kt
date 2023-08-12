@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.konkuk.capture.databinding.FragmentBottomSheetEnrollBinding
 import com.konkuk.capture.ui.capture.CaptureActivity
+import com.konkuk.capture.ui.search.SearchFoodActivity
 
 class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
@@ -41,7 +42,10 @@ class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 val intent = Intent(context, CaptureActivity::class.java)
                 startActivity(intent)
             } else {
-                val intent = Intent(context, EnrollTextInput::class.java)
+                // TODO REPLACE
+                // val intent = Intent(context, EnrollTextInput::class.java)
+                // startActivity(intent)
+                val intent = Intent(context, SearchFoodActivity::class.java)
                 startActivity(intent)
             }
         }
