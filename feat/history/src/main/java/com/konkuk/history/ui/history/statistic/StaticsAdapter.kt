@@ -27,7 +27,7 @@ class StaticsAdapter : ListAdapter<StaticsItemModel, StaticsAdapter.ViewHolder>(
 
             // 사용자가 섭취한 영양성분
             progressBarPersonal.progress =
-                if (data.avgCalorie == 0) 100 else (data.myCalorie * 100 / data.avgCalorie)
+                if (data.avgCalorie == 0) 0 else (data.myCalorie * 100 / data.avgCalorie)
             txtPersonal.text = data.myCalorie.toString() + data.foodUnit
             txtImEat.text = "내가 먹은 ${data.itemName}"
 
@@ -39,7 +39,7 @@ class StaticsAdapter : ListAdapter<StaticsItemModel, StaticsAdapter.ViewHolder>(
 
             animateProgressBar(
                 progressBarPersonal,
-                if (data.avgCalorie == 0) 100 else (data.myCalorie * 100 / data.avgCalorie),
+                if (data.avgCalorie == 0) 0 else (data.myCalorie * 100 / data.avgCalorie),
             )
         }
     }

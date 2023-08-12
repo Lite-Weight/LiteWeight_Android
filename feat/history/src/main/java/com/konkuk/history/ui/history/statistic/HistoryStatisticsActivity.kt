@@ -1,11 +1,9 @@
 package com.konkuk.history.ui.history.statistic
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.konkuk.history.databinding.ActivityHistoryStatisticsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -25,33 +23,24 @@ class HistoryStatisticsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initRecyclerView()
-        initData()
-        initBack()
+        initViews()
     }
 
-    private fun initBack() {
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
-    }
+    private fun initViews() = with(binding) {
+        binding.lifecycleOwner = this@HistoryStatisticsActivity
+        binding.vm = viewModel
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun initData() {
+        adapter = StaticsAdapter()
+        rvHistoryStatistics.adapter = adapter
+
         lifecycleScope.launch {
             viewModel.dataList.collectLatest {
                 adapter.submitList(it)
             }
         }
-    }
 
-    private fun initRecyclerView() = with(binding) {
-        rvHistoryStatistics.layoutManager = LinearLayoutManager(
-            this@HistoryStatisticsActivity,
-            LinearLayoutManager.VERTICAL,
-            false,
-        )
-        adapter = StaticsAdapter()
-        rvHistoryStatistics.adapter = adapter
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 }

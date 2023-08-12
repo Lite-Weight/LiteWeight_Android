@@ -16,6 +16,7 @@ import com.konkuk.capture.ui.result.CaptureResultViewModel
 import com.konkuk.common.ui.decoration.FirstItemDecoration
 import com.konkuk.history.databinding.FragmentHistoryBinding
 import com.konkuk.history.ui.history.statistic.HistoryStatisticsActivity
+import com.konkuk.history.ui.history.statistic.StatisticViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -56,7 +57,10 @@ class HistoryFragment : Fragment() {
 
     private fun initNextBtn() {
         binding.nextButton.setOnClickListener {
-            val intent = Intent(requireContext(), HistoryStatisticsActivity::class.java)
+            val intent = Intent(requireContext(), HistoryStatisticsActivity::class.java).putExtra(
+                StatisticViewModel.SELECTED_DAY_KEY,
+                (viewModel.uiState.value.historyDateUiState as HistoryDateUiState.Avail).selectedDay,
+            )
             startActivity(intent)
         }
     }
@@ -116,6 +120,7 @@ class HistoryFragment : Fragment() {
             is HistoryDateUiState.Uninitialized -> {}
             is HistoryDateUiState.Error -> {}
             is HistoryDateUiState.Avail -> {
+                tvProgressTitle.text = "${historyDateUiState.selectedDay}일의 분석결과 보러가기"
                 calendarAdapter.submitList(historyDateUiState.calendarList.toList())
             }
         }

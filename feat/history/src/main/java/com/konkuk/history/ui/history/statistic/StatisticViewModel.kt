@@ -1,15 +1,17 @@
 package com.konkuk.history.ui.history.statistic
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.konkuk.common.R
 import com.konkuk.history.data.datasource.statistic.NutritionStat
 import com.konkuk.history.data.datasource.statistic.StatCSVParser
 import com.konkuk.history.domain.model.HistoryItemModel
-import com.konkuk.history.domain.usecase.GetHistoryDateUseCase
 import com.konkuk.history.domain.usecase.GetHistoryListUseCase
+import com.konkuk.history.domain.usecase.GetMonthUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -18,32 +20,29 @@ import javax.inject.Inject
 @HiltViewModel
 class StatisticViewModel @Inject constructor(
     private val getHistoryListUseCase: GetHistoryListUseCase,
-    private val getHistoryDateUseCase: GetHistoryDateUseCase,
+    private val getMonthUseCase: GetMonthUseCase,
     private val parser: StatCSVParser,
-
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    private val statList = MutableStateFlow(
-        NutritionStat(
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-        ),
-    )
+    private val statList = MutableStateFlow(NutritionStat(0, 0, 0, 0, 0, 0))
     private val nutList = MutableStateFlow(
         HistoryItemModel(
             0L, 0L, "", 0, 0, 0, 0, 0, 0,
         ),
     )
 
-    val gender = MutableStateFlow(GENDER.MALE)
-    val age = MutableStateFlow(18)
+    val date = MutableStateFlow("-월 -일의 분석")
+
+    private val _gender = MutableStateFlow(GENDER.MALE)
+    val gender get() = _gender.asStateFlow()
+
+    private val _age = MutableStateFlow(18)
+    val age get() = _age.asStateFlow()
+
     val dataList = MutableStateFlow<List<StaticsItemModel>>(emptyList())
 
     init {
-        initMyStat()
+        initMyStat(savedStateHandle.get<Int>(SELECTED_DAY_KEY)!!)
         initAvgStat()
         initDateList()
     }
@@ -53,7 +52,7 @@ class StatisticViewModel @Inject constructor(
             combine(nutList, statList) { my, avg ->
                 val list = mutableListOf<StaticsItemModel>()
                 val ageRange =
-                    NutritionStat.ageList[NutritionStat.getAgeIndex(age.value)].let { "${it.first}-${it.last}" }
+                    NutritionStat.ageList[NutritionStat.getAgeIndex(_age.value)].let { "${it.first}-${it.last}" }
                 list.add(
                     StaticsItemModel(
                         "칼로리",
@@ -101,19 +100,20 @@ class StatisticViewModel @Inject constructor(
 
     private fun initAvgStat() {
         viewModelScope.launch {
-            combine(gender, age) { (g, a) -> Pair(g, a) }.collect {
-                parser.getItemList(if (gender.value == GENDER.MALE) R.raw.edit_avg_male else R.raw.edit_avg_femial)
+            combine(_gender, _age) { (g, a) -> Pair(g, a) }.collect {
+                parser.getItemList(if (_gender.value == GENDER.MALE) R.raw.edit_avg_male else R.raw.edit_avg_femial)
                     .onSuccess {
-                        statList.value = it[NutritionStat.getAgeIndex(age.value)]
+                        statList.value = it[NutritionStat.getAgeIndex(_age.value)]
                     }
             }
         }
     }
 
-    private fun initMyStat() {
+    private fun initMyStat(selectedDay: Int?) {
+        date.value = "${getMonthUseCase()}월 ${selectedDay}일의 분석"
         viewModelScope.launch {
-            val date = getHistoryDateUseCase().getOrNull()?.first()
-            val historyList = getHistoryListUseCase(requireNotNull(date)).getOrNull()?.first()
+            val historyList =
+                getHistoryListUseCase(requireNotNull(selectedDay)).getOrNull()?.first()
             if (historyList?.size == 0) return@launch
             nutList.value = historyList!!.reduce { item, sum ->
                 HistoryItemModel(
@@ -129,6 +129,10 @@ class StatisticViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    companion object {
+        const val SELECTED_DAY_KEY = "SELECTED_DAY_KEY"
     }
 }
 
