@@ -51,7 +51,7 @@ data class NutritionStat(
     val sodium: Int,
 ) {
     companion object {
-        val ageList = listOf(0..2, 3..5, 6..11, 12..18, 19..29, 50..64, 51..100)
+        val ageList = listOf(0..2, 3..5, 6..11, 12..18, 19..29, 30..49, 50..64, 51..100)
         fun getAgeIndex(age: Int) =
             when (age) {
                 in 0..2 -> 0
@@ -59,8 +59,9 @@ data class NutritionStat(
                 in 6..11 -> 2
                 in 12..18 -> 3
                 in 19..29 -> 4
-                in 50..64 -> 5
-                else -> 6
+                in 30..49 -> 5
+                in 50..64 -> 6
+                else -> 7
             }
     }
 }
