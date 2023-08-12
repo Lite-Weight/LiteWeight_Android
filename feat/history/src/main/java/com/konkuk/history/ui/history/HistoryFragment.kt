@@ -15,6 +15,7 @@ import com.konkuk.capture.ui.result.CaptureResultActivity
 import com.konkuk.capture.ui.result.CaptureResultViewModel
 import com.konkuk.common.ui.decoration.FirstItemDecoration
 import com.konkuk.history.databinding.FragmentHistoryBinding
+import com.konkuk.history.ui.history.staticsView.HistoryStatisticsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
@@ -50,6 +51,14 @@ class HistoryFragment : Fragment() {
         observeUiState()
         initRecyclerView()
         initHistoryRecyclerView()
+        initNextBtn()
+    }
+
+    private fun initNextBtn() {
+        binding.nextButton.setOnClickListener {
+            val intent = Intent(requireContext(), HistoryStatisticsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initHistoryRecyclerView() = with(binding) {

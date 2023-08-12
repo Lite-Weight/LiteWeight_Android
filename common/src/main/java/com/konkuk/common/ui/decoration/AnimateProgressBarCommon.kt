@@ -1,10 +1,10 @@
-package com.konkuk.personal.ui.personal
+package com.konkuk.common.ui.decoration
 
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.ProgressBar
 
-class AnimateProgressBar(
+class AnimateProgressBarCommon(
     private var progressBar: ProgressBar,
     private var from: Float,
     private var to: Float,
