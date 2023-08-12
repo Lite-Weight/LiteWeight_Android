@@ -11,6 +11,10 @@
             android:exported="false"
             android:theme="@style/Theme.LiteWeight_Android.NoActionBar" />
         <activity
+            android:name=".ui.search.SearchFoodActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LiteWeight_Android.NoActionBar" />
+        <activity
             android:name=".ui.enroll.EnrollTextInput"
             android:exported="false"
             android:theme="@style/Theme.LiteWeight_Android.NoActionBar" />

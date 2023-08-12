@@ -1,3 +1,4 @@
 <resources>
     <string name="text_input_hint">입력하기</string>
+    <string name="weight_unit">총 내용량 %1$dg</string>
 </resources>

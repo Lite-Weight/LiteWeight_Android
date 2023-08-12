@@ -1,27 +1,23 @@
-package com.konkuk.history.ui.history.staticsView
+package com.konkuk.history.ui.history.statistic
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.konkuk.common.ui.decoration.AnimateProgressBarCommon
 import com.konkuk.history.databinding.StaticsItemBinding
 import java.lang.Math.abs
 
-class StaticsAdapter(
-    var items: ArrayList<StaticsItemModel>,
-) : RecyclerView.Adapter<StaticsAdapter.ViewHolder>() {
+class StaticsAdapter : ListAdapter<StaticsItemModel, StaticsAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(val binding: StaticsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
         fun bind(data: StaticsItemModel) = with(binding) {
-            /* root.setOnClickListener {
-                 onClick(data)
-             }*/
-
             // 영양성분 이름
             txtItemName.text = data.itemName
 
@@ -31,22 +27,19 @@ class StaticsAdapter(
 
             // 사용자가 섭취한 영양성분
             progressBarPersonal.progress =
-                (data.myCalorie * 100 / data.avgCalorie).toInt()
+                if (data.avgCalorie == 0) 0 else (data.myCalorie * 100 / data.avgCalorie)
             txtPersonal.text = data.myCalorie.toString() + data.foodUnit
             txtImEat.text = "내가 먹은 ${data.itemName}"
 
             // About
             val calculate = data.avgCalorie - data.myCalorie
-            if (calculate < 0) {
-                txtAbout.text = "${data.avgAge}살 남성에 비해 ${abs(calculate)}${data.foodUnit} 더 먹었어요"
-            } else {
-                txtAbout.text = "${data.avgAge}살 남성에 비해 ${calculate}${data.foodUnit} 덜 먹었어요"
-            }
+            txtAbout.text =
+                "${data.avgAge}살 ${if (data.gender == GENDER.MALE) "남성" else "여성"}에 비해 " +
+                "${abs(calculate)}${data.foodUnit} ${if (calculate < 0) "더" else "덜"} 먹었어요"
 
-            // progressBarPersonal 애니메이션 설정
             animateProgressBar(
                 progressBarPersonal,
-                (data.myCalorie * 100 / data.avgCalorie).toInt(),
+                if (data.avgCalorie == 0) 0 else (data.myCalorie * 100 / data.avgCalorie),
             )
         }
     }
@@ -64,28 +57,24 @@ class StaticsAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(currentList[position])
     }
 
-    override fun getItemCount(): Int {
-        return items.size
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<StaticsItemModel>() {
+            override fun areItemsTheSame(
+                oldItem: StaticsItemModel,
+                newItem: StaticsItemModel,
+            ): Boolean {
+                return oldItem.itemName == newItem.itemName
+            }
+
+            override fun areContentsTheSame(
+                oldItem: StaticsItemModel,
+                newItem: StaticsItemModel,
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
-
-    /*  companion object {
-          val diffUtil = object : DiffUtil.ItemCallback<HistoryItemModel>() {
-              override fun areItemsTheSame(
-                  oldItem: HistoryItemModel,
-                  newItem: HistoryItemModel,
-              ): Boolean {
-                  return oldItem.date == newItem.date
-              }
-
-              override fun areContentsTheSame(
-                  oldItem: HistoryItemModel,
-                  newItem: HistoryItemModel,
-              ): Boolean {
-                  return oldItem == newItem
-              }
-          }
-      }*/
 }

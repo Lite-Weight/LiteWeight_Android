@@ -113,7 +113,7 @@
                     <ImageView
                         android:layout_width="24sp"
                         android:layout_height="24sp"
-                        android:src="@drawable/pen3x"
+                        android:src="@drawable/ic_search"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="직접 입력"
+                    android:text="검색 하기"
                     android:textColor="#4A545E"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"

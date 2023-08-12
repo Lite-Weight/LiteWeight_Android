@@ -1,4 +1,4 @@
-package com.konkuk.capture.data
+package com.konkuk.capture.data.capture
 
 import com.konkuk.common.data.FoodInfo
 import javax.inject.Inject

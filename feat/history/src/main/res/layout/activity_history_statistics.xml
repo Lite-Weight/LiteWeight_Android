@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.konkuk.history.ui.history.statistic.StatisticViewModel" />
+    </data>
+
     <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
-        tools:context=".ui.history.staticsView.HistoryStatisticsActivity">
+        tools:context=".ui.history.statistic.HistoryStatisticsActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,11 +42,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_title"
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="{7월 12일}의 분석"
+                    android:text="@={vm.date}"
                     android:textColor="@color/black"
                     android:textSize="21sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -59,12 +66,14 @@
                 android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:paddingHorizontal="25dp">
 
                 <LinearLayout
+                    android:onClick="@{() -> vm.changeGender()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -91,13 +100,14 @@
 
                     <TextView
                         android:id="@+id/txt_gender"
+                        gender="@{vm.gender}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="남성"
                         android:textColor="@color/main_blue"
                         android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="남성" />
 
                 </LinearLayout>
 
@@ -130,13 +140,14 @@
 
                     <TextView
                         android:id="@+id/txt_age"
+                        ageRange="@{vm.age}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="12 ~ 18살"
                         android:textColor="@color/main_blue"
                         android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="12 ~ 18살" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -151,7 +162,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_history_statistics"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </LinearLayout>
     </ScrollView>

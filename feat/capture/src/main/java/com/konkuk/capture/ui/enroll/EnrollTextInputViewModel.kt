@@ -42,6 +42,22 @@ class EnrollTextInputViewModel @Inject constructor(
 
             setFoodInfo(result)
         }
+        savesStateHandle.get<FoodInfo?>(API_RESULT_KEY)?.let {
+            setFoodInfo(it)
+        }
+    }
+
+    private fun setFoodInfo(foodInfo: FoodInfo) {
+        name.value = foodInfo.name
+        sodium.value = foodInfo.sodium.toString()
+        carbohydrates.value = foodInfo.carbohydrates.toString()
+        sugar.value = foodInfo.sugar.toString()
+        cholesterol.value = foodInfo.cholesterol.toString()
+        fat.value = foodInfo.fat.toString()
+        protein.value = foodInfo.protein.toString()
+        transFat.value = foodInfo.transFat.toString()
+        saturatedFat.value = foodInfo.saturatedFat.toString()
+        calories.value = foodInfo.calories.toString()
     }
 
     private fun setFoodInfo(result: String) {
@@ -95,5 +111,6 @@ class EnrollTextInputViewModel @Inject constructor(
 
     companion object {
         const val OCR_RESULT_KEY = "OCR_RESULT_KEY"
+        const val API_RESULT_KEY = "API_RESULT_KEY"
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.konkuk.capture.databinding.FragmentBottomSheetEnrollBinding
 import com.konkuk.capture.ui.capture.CaptureActivity
+import com.konkuk.capture.ui.search.SearchFoodActivity
 
 class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
@@ -28,9 +29,7 @@ class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        // 등록방법 선택
         initSelector()
-        // 다음화면 넘어감
         initNext()
     }
 
@@ -41,14 +40,13 @@ class EnrollBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 val intent = Intent(context, CaptureActivity::class.java)
                 startActivity(intent)
             } else {
-                val intent = Intent(context, EnrollTextInput::class.java)
+                val intent = Intent(context, SearchFoodActivity::class.java)
                 startActivity(intent)
             }
         }
     }
 
     private fun initSelector() = with(binding) {
-        // 카메라 혹은 펜 둘중 하나 선택 하는 버튼(카메라가 기본 선택)
         selectorCamera.isSelected = true
         selectorPen.isSelected = false
         selectorCamera.setOnClickListener {

@@ -66,7 +66,7 @@ dependencies {
     kapt(DI.HILT_COMPLIER)
 
     // Git Library (graph)
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation(MPCHART.GRAPH)
 }
 
 kapt {

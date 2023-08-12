@@ -6,12 +6,14 @@ object Versions {
     const val COMPILE_SDK_VERSION = 33
     const val MIN_SDK_VERSION = 26
     const val TARGET_SDK_VERSION = 33
+    const val SERIALIZATION_JSON = "1.5.1"
 
     // AndroidX
     const val CORE_KTX = "1.10.0"
     const val APP_COMPAT = "1.6.1"
     const val CONSTRAINT_LAYOUT = "2.1.4"
     const val NAVIGATION = "2.5.3"
+    const val PAGING3 = "3.1.1"
 
     // Android
     const val MATERIAL = "1.8.0"
@@ -32,10 +34,19 @@ object Versions {
 
     // MLKIT
     const val TEXT_RECOGNITION = "16.0.0"
+
+    // MPChart
+    const val MPCHART = "v3.1.0"
+
+    // Network
+    const val RETROFIT = "2.9.0"
+    const val OKHTTP = "4.10.0"
+    const val SERIALIZATION_CONVERTER = "0.8.0"
 }
 
 object Kotlin {
     const val KOTLIN_STDLIB = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN_VERSION}"
+    const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.SERIALIZATION_JSON}"
 }
 
 object AndroidX {
@@ -58,6 +69,9 @@ object AndroidX {
     const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
     const val ROOM_COMPLIER = "androidx.room:room-compiler:${Versions.ROOM}"
     const val ROOM_KTX = "androidx.room:room-ktx:${Versions.ROOM}"
+
+    // Pagging
+    const val PAGING3 = "androidx.paging:paging-runtime:${Versions.PAGING3}"
 }
 
 object Material {
@@ -81,4 +95,17 @@ object DI {
 
 object MLKIT {
     const val TEXT_RECOGNITION = "com.google.mlkit:text-recognition-korean:${Versions.TEXT_RECOGNITION}"
+}
+
+object MPCHART {
+    const val GRAPH = "com.github.PhilJay:MPAndroidChart:${Versions.MPCHART}"
+}
+
+object NETWORK {
+    // Retrofit
+    const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+    const val KOTLIN_CONVERTER = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.SERIALIZATION_CONVERTER}"
+    const val GSON_CONVERTER = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
+    const val OKHTTP = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
+    const val OKHTTP_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP}"
 }

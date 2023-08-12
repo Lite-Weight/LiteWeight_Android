@@ -1,6 +1,6 @@
 package com.konkuk.capture.domain
 
-import com.konkuk.capture.data.CaptureResultRepository
+import com.konkuk.capture.data.capture.CaptureResultRepository
 import com.konkuk.common.data.FoodInfo
 import javax.inject.Inject
 
