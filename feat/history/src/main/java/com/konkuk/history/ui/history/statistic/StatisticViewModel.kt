@@ -86,7 +86,7 @@ class StatisticViewModel @Inject constructor(
                     StaticsItemModel(
                         "나트륨",
                         avg.sodium,
-                        my.fat,
+                        my.sodium,
                         ageRange,
                         "mg",
                     ),
