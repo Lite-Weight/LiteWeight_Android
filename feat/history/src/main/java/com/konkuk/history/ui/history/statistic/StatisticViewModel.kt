@@ -60,6 +60,7 @@ class StatisticViewModel @Inject constructor(
                         my.calories,
                         ageRange,
                         "kcal",
+                        _gender.value,
                     ),
                 )
                 list.add(
@@ -69,6 +70,7 @@ class StatisticViewModel @Inject constructor(
                         my.carbohydrates,
                         ageRange,
                         "g",
+                        _gender.value,
                     ),
                 )
                 list.add(
@@ -78,10 +80,29 @@ class StatisticViewModel @Inject constructor(
                         my.protein,
                         ageRange,
                         "g",
+                        _gender.value,
                     ),
                 )
-                list.add(StaticsItemModel("지방", avg.fat, my.fat, ageRange, "g"))
-                list.add(StaticsItemModel("당류", avg.sugar, my.sugar, ageRange, "g"))
+                list.add(
+                    StaticsItemModel(
+                        "지방",
+                        avg.fat,
+                        my.fat,
+                        ageRange,
+                        "g",
+                        _gender.value,
+                    ),
+                )
+                list.add(
+                    StaticsItemModel(
+                        "당류",
+                        avg.sugar,
+                        my.sugar,
+                        ageRange,
+                        "g",
+                        _gender.value,
+                    ),
+                )
                 list.add(
                     StaticsItemModel(
                         "나트륨",
@@ -89,6 +110,7 @@ class StatisticViewModel @Inject constructor(
                         my.sodium,
                         ageRange,
                         "mg",
+                        _gender.value,
                     ),
                 )
                 list
