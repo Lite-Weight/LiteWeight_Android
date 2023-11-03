@@ -69,6 +69,11 @@ class CaptureActivity : AppCompatActivity() {
             reCapture()
         })
         captureDialog.show(supportFragmentManager, "CaptureDialogFragment")
+
+        binding.llBackBtn.setOnClickListener {
+            finish()
+            startActivity(Intent(this@CaptureActivity, EnrollTextInput::class.java))
+        }
     }
 
     @SuppressLint("SetTextI18n")
