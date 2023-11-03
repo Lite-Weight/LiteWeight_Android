@@ -1,5 +1,7 @@
 package com.konkuk.capture.ui.enroll
 
+import android.graphics.Bitmap
+import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.konkuk.common.data.FoodInfo
@@ -34,6 +36,8 @@ class EnrollTextInputViewModel @Inject constructor(
     val saturatedFat = MutableStateFlow("")
     val calories = MutableStateFlow("")
 
+    val capturedPicture = MutableStateFlow<CapturedPicture>(CapturedPicture.None)
+
     init {
         savesStateHandle.get<String>(OCR_RESULT_KEY)?.let { text ->
             val result = text.replace(" ", "")
@@ -44,6 +48,11 @@ class EnrollTextInputViewModel @Inject constructor(
         }
         savesStateHandle.get<FoodInfo?>(API_RESULT_KEY)?.let {
             setFoodInfo(it)
+        }
+        savesStateHandle.get<Uri>(URI_PICTURE_KEY)?.let {
+            capturedPicture.value = CapturedPicture.UriPicture(it)
+        } ?: savesStateHandle.get<Bitmap>(BITMAP_PICTURE_KEY)?.let {
+            capturedPicture.value = CapturedPicture.BitmapPicture(it)
         }
     }
 
@@ -112,5 +121,13 @@ class EnrollTextInputViewModel @Inject constructor(
     companion object {
         const val OCR_RESULT_KEY = "OCR_RESULT_KEY"
         const val API_RESULT_KEY = "API_RESULT_KEY"
+        const val BITMAP_PICTURE_KEY = "BITMAP_PICTURE_KEY"
+        const val URI_PICTURE_KEY = "URI_PICTURE_KEY"
     }
+}
+
+sealed class CapturedPicture {
+    data class UriPicture(val uri: Uri) : CapturedPicture()
+    data class BitmapPicture(val bitmap: Bitmap) : CapturedPicture()
+    object None : CapturedPicture()
 }
