@@ -42,6 +42,9 @@ object Versions {
     const val RETROFIT = "2.9.0"
     const val OKHTTP = "4.10.0"
     const val SERIALIZATION_CONVERTER = "0.8.0"
+
+    // DataStore
+    const val DATASTORE = "1.0.0"
 }
 
 object Kotlin {
@@ -72,6 +75,9 @@ object AndroidX {
 
     // Pagging
     const val PAGING3 = "androidx.paging:paging-runtime:${Versions.PAGING3}"
+
+    // DataStore
+    const val DATASTORE = "androidx.datastore:datastore-preferences:${Versions.DATASTORE}"
 }
 
 object Material {

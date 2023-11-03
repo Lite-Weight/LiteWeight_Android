@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.konkuk.common.data.AppDatabase
 import com.konkuk.common.data.FoodInfoDao
+import com.konkuk.common.data.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,5 +29,11 @@ class DatabaseModule {
     @Singleton
     fun provideFoodInfoDao(db: AppDatabase): FoodInfoDao {
         return db.foodInfoDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(@ApplicationContext context: Context): UserRepository {
+        return UserRepository(context)
     }
 }

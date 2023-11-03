@@ -59,4 +59,7 @@ dependencies {
     // DI
     implementation(DI.HILT)
     kapt(DI.HILT_COMPLIER)
+
+    // DataStore
+    implementation(AndroidX.DATASTORE)
 }
