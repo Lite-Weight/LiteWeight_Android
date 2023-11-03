@@ -33,6 +33,14 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(Intent(this@SettingsActivity, EditAgeActivity::class.java))
         }
 
+        llGender.setOnClickListener {
+            val bottomSheetDialogFragment = EditGenderBottomSheetDialogFragment()
+            bottomSheetDialogFragment.show(
+                supportFragmentManager,
+                bottomSheetDialogFragment.tag,
+            )
+        }
+
         ivBackBtn.setOnClickListener {
             finish()
         }

@@ -3,17 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="kotlin.jvm.functions.Function0" />
-
-        <import type="kotlin.Unit" />
 
         <variable
-            name="clickLeft"
-            type="Function0&lt;Unit>" />
-
-        <variable
-            name="clickRight"
-            type="Function0&lt;Unit>" />
+            name="vm"
+            type="com.konkuk.personal.ui.settings.SettingsViewModel" />
     </data>
 
     <LinearLayout
@@ -36,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:text="등록 방법을 선택해 주세요"
+            android:text="성별을 선택해 주세요"
             android:textColor="@android:color/black"
             android:textSize="21sp"
             android:textStyle="bold" />
@@ -47,7 +40,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="영양성분표를 카메라로 촬영하거나\n직접 입력해주세요"
+            android:text="자신의 성별 남, 여 중 하나를\n 선택해 주세요"
             android:textColor="#4A545E"
             android:textSize="13sp" />
 
@@ -63,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="32dp"
+                android:onClick="@{() -> vm.selectMale()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/right"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -70,11 +64,10 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/selectorCamera"
+                    android:id="@+id/selectorMale"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:onClick="@{() -> clickLeft.invoke()}"
-                    android:background="@drawable/selector_camera"
+                    android:background="@drawable/selector_male"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -82,11 +75,12 @@
                     <ImageView
                         android:layout_width="24sp"
                         android:layout_height="24sp"
-                        android:src="@drawable/camera3x"
+                        android:src="@drawable/baseline_male_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/main_blue" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,12 +89,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="카메라"
+                    android:text="Male"
                     android:textColor="#4A545E"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/selectorCamera" />
+                    app:layout_constraintTop_toBottomOf="@+id/selectorMale" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -110,17 +104,17 @@
                 android:id="@+id/right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> vm.selectFemale()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/left"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/selectorPen"
+                    android:id="@+id/selectorFemale"
                     android:layout_width="72dp"
-                    android:onClick="@{() -> clickRight.invoke()}"
                     android:layout_height="72dp"
-                    android:background="@drawable/selector_pen"
+                    android:background="@drawable/selector_female"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -128,11 +122,12 @@
                     <ImageView
                         android:layout_width="24sp"
                         android:layout_height="24sp"
-                        android:src="@drawable/ic_search"
+                        android:src="@drawable/baseline_female_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/stroke_yello" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -141,12 +136,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="검색 하기"
+                    android:text="Female"
                     android:textColor="#4A545E"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/selectorPen" />
+                    app:layout_constraintTop_toBottomOf="@+id/selectorFemale" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -161,7 +156,7 @@
             android:layout_height="58sp"
             android:layout_marginTop="29dp"
             android:background="@drawable/btn_customfull"
-            android:backgroundTint="@color/button_color_selector"
+            android:backgroundTint="@color/main_blue"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"

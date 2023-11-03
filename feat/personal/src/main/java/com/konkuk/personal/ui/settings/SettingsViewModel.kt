@@ -73,4 +73,12 @@ class SettingsViewModel @Inject constructor(private val userRepository: UserRepo
             }
         }
     }
+
+    fun selectMale() {
+        editableGender.value = true
+    }
+
+    fun selectFemale() {
+        editableGender.value = false
+    }
 }

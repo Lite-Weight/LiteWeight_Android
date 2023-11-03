@@ -56,6 +56,7 @@
         <EditText
             android:id="@+id/et_age"
             android:layout_width="0dp"
+            android:inputType="number"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="28dp"
             android:layout_marginTop="32dp"
