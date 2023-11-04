@@ -6,10 +6,16 @@ import java.util.Calendar
 import javax.inject.Inject
 
 class GetHistoryDateUseCase @Inject constructor() {
-    operator fun invoke(): Result<Flow<Int>> {
+    operator fun invoke(): Result<Flow<Triple<Int, Int, Int>>> {
         return kotlin.runCatching {
             flow {
-                emit(Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+                emit(
+                    Triple(
+                        Calendar.getInstance().get(Calendar.YEAR),
+                        Calendar.getInstance().get(Calendar.MONTH) + 1,
+                        Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+                    ),
+                )
             }
         }
     }

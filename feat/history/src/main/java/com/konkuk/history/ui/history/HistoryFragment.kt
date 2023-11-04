@@ -60,6 +60,12 @@ class HistoryFragment : Fragment() {
             val intent = Intent(requireContext(), HistoryStatisticsActivity::class.java).putExtra(
                 StatisticViewModel.SELECTED_DAY_KEY,
                 (viewModel.uiState.value.historyDateUiState as HistoryDateUiState.Avail).selectedDay,
+            ).putExtra(
+                StatisticViewModel.SELECTED_MONTH_KEY,
+                (viewModel.uiState.value.historyDateUiState as HistoryDateUiState.Avail).month,
+            ).putExtra(
+                StatisticViewModel.SELECTED_YEAR_KEY,
+                (viewModel.uiState.value.historyDateUiState as HistoryDateUiState.Avail).year,
             )
             startActivity(intent)
         }
@@ -102,6 +108,11 @@ class HistoryFragment : Fragment() {
     }
 
     private fun initViews() = with(binding) {
+        ivCalendarButton.setOnClickListener {
+            DatePickerFragment { year, month, day ->
+                viewModel.setDate(year, month, day)
+            }.show(parentFragmentManager, "datePicker")
+        }
     }
 
     private fun observeUiState() {
@@ -120,6 +131,7 @@ class HistoryFragment : Fragment() {
             is HistoryDateUiState.Uninitialized -> {}
             is HistoryDateUiState.Error -> {}
             is HistoryDateUiState.Avail -> {
+                tvHistoryTitle.text = "${historyDateUiState.month}월의 기록"
                 tvProgressTitle.text = "${historyDateUiState.selectedDay}일의 분석결과 보러가기"
                 calendarAdapter.submitList(historyDateUiState.calendarList.toList())
             }

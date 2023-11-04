@@ -9,8 +9,16 @@ import javax.inject.Inject
 class GetHistoryListUseCase @Inject constructor(
     private val historyRepository: HistoryRepository,
 ) {
-    operator fun invoke(selectedDay: Int): Result<Flow<List<HistoryItemModel>>> {
+    operator fun invoke(
+        year: Int? = null,
+        month: Int? = null,
+        selectedDay: Int,
+    ): Result<Flow<List<HistoryItemModel>>> {
         val date = Date(System.currentTimeMillis())
-        return historyRepository.getFoodHistory(date.year + 1900, date.month + 1, selectedDay)
+        return historyRepository.getFoodHistory(
+            year ?: (date.year + 1900),
+            month ?: (date.month + 1),
+            selectedDay,
+        )
     }
 }

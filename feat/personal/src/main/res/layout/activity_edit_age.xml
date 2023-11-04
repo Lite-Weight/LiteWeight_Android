@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="vm"
+            type="com.konkuk.personal.ui.settings.SettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_back_btn"
+            android:layout_width="28dp"
+            android:layout_height="20dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/backsvg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="나이 입력하기"
+            app:layout_constraintBottom_toBottomOf="@id/iv_back_btn"
+            app:layout_constraintStart_toEndOf="@id/iv_back_btn"
+            app:layout_constraintTop_toTopOf="@id/iv_back_btn" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="72dp"
+            android:text="나이를 입력해주세요"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_back_btn" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="자신의 만 나이를 입력해주세요"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <EditText
+            android:id="@+id/et_age"
+            android:layout_width="0dp"
+            android:inputType="number"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="32dp"
+            android:background="@null"
+            android:text="@={vm.editableAge}"
+            android:hint="ex)23"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_desc" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/main_blue"
+            app:layout_constraintEnd_toEndOf="@id/et_age"
+            app:layout_constraintStart_toStartOf="@id/et_age"
+            app:layout_constraintTop_toBottomOf="@id/et_age" />
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/main_blue"
+            android:clickable="true"
+            isEnabled="@{vm.canEditAge}"
+            android:gravity="center"
+            android:text="확인"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

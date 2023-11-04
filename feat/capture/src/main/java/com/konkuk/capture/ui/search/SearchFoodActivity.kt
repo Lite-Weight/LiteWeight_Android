@@ -2,6 +2,7 @@ package com.konkuk.capture.ui.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -16,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -55,6 +57,17 @@ class SearchFoodActivity : AppCompatActivity() {
                             adapter.submitData(it)
                         }
                     }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.textField.collectLatest { text ->
+                if (text.isBlank()) {
+                    delay(200)
+                    binding.llSearchNotiImage.visibility = View.VISIBLE
+                } else {
+                    binding.llSearchNotiImage.visibility = View.GONE
                 }
             }
         }

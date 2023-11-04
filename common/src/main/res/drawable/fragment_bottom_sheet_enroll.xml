@@ -2,20 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <import type="kotlin.jvm.functions.Function0" />
-
-        <import type="kotlin.Unit" />
-
-        <variable
-            name="clickLeft"
-            type="Function0&lt;Unit>" />
-
-        <variable
-            name="clickRight"
-            type="Function0&lt;Unit>" />
-    </data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,7 +33,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="영양성분표를 카메라로 촬영하거나\n직접 입력해주세요"
+            android:text="영양성분표를 카메라로 촬영하거나\n
+직접 입력해주세요"
             android:textColor="#4A545E"
             android:textSize="13sp" />
 
@@ -73,7 +60,6 @@
                     android:id="@+id/selectorCamera"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:onClick="@{() -> clickLeft.invoke()}"
                     android:background="@drawable/selector_camera"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +104,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/selectorPen"
                     android:layout_width="72dp"
-                    android:onClick="@{() -> clickRight.invoke()}"
                     android:layout_height="72dp"
                     android:background="@drawable/selector_pen"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +146,7 @@
             android:layout_height="58sp"
             android:layout_marginTop="29dp"
             android:background="@drawable/btn_customfull"
-            android:backgroundTint="@color/button_color_selector"
+            android:backgroundTint="@color/main_blue"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"

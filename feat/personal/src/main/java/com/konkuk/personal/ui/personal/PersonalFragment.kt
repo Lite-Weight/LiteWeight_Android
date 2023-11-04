@@ -1,6 +1,7 @@
 package com.konkuk.personal.ui.personal
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +25,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.konkuk.common.ui.decoration.AnimateProgressBarCommon
 import com.konkuk.personal.databinding.FragmentPersonalBinding
+import com.konkuk.personal.ui.settings.SettingsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -50,6 +52,13 @@ class PersonalFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         observeUiState()
+        initViews()
+    }
+
+    private fun initViews() {
+        binding.ivSettings.setOnClickListener {
+            startActivity(Intent(requireContext(), SettingsActivity::class.java))
+        }
     }
 
     private fun observeUiState() {

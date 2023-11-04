@@ -35,8 +35,13 @@ class HistoryViewModel @Inject constructor(
         initFoodHistory()
     }
 
-    private fun initCalendar(): List<HistoryCalendarModel> {
+    private fun initCalendar(
+        selectedDate: Triple<Int, Int, Int>? = null,
+    ): List<HistoryCalendarModel> {
         val calendar = Calendar.getInstance()
+        selectedDate?.let { (year, month, day) ->
+            calendar.set(year, month - 1, day)
+        }
         val today = calendar.get(Calendar.DAY_OF_MONTH)
         calendar.set(Calendar.DAY_OF_MONTH, 1) // 이번 달의 1일로 설정
 
@@ -56,14 +61,33 @@ class HistoryViewModel @Inject constructor(
         return calendarList
     }
 
+    fun setDate(year: Int, month: Int, day: Int) {
+        _uiState.value = _uiState.value.copy(
+            historyDateUiState = HistoryDateUiState.Avail(
+                year,
+                month,
+                day,
+                day,
+                initCalendar(Triple(year, month, day)),
+            ),
+        )
+        initHistoryList(year, month, day)
+    }
+
     private fun initFoodHistory() {
         getHistoryDateUseCase().onSuccess { value ->
             viewModelScope.launch {
-                val today = value.first()
+                val (year, month, today) = value.first()
                 _uiState.value = _uiState.value.copy(
-                    historyDateUiState = HistoryDateUiState.Avail(today, today, initCalendar()),
+                    historyDateUiState = HistoryDateUiState.Avail(
+                        year,
+                        month,
+                        today,
+                        today,
+                        initCalendar(),
+                    ),
                 )
-                initHistoryList(today)
+                initHistoryList(selectedDay = today)
             }
         }.onFailure {
             _uiState.value = _uiState.value.copy(
@@ -73,8 +97,8 @@ class HistoryViewModel @Inject constructor(
         }
     }
 
-    private fun initHistoryList(selectedDay: Int) {
-        getHistoryListUseCase(selectedDay).onSuccess { value ->
+    private fun initHistoryList(year: Int? = null, month: Int? = null, selectedDay: Int) {
+        getHistoryListUseCase(year, month, selectedDay).onSuccess { value ->
             job?.cancel()
             job = Job()
             CoroutineScope((job ?: Job())).launch {
@@ -106,12 +130,17 @@ class HistoryViewModel @Inject constructor(
                         },
                 ),
             )
-            getHistoryList(selectedDay)
+
+            getHistoryList(
+                (_uiState.value.historyDateUiState as HistoryDateUiState.Avail).year,
+                (_uiState.value.historyDateUiState as HistoryDateUiState.Avail).month,
+                selectedDay,
+            )
         }
     }
 
-    private fun getHistoryList(selectedDay: Int) {
-        getHistoryListUseCase(selectedDay).onSuccess { value ->
+    private fun getHistoryList(year: Int, month: Int, selectedDay: Int) {
+        getHistoryListUseCase(year, month, selectedDay).onSuccess { value ->
             job?.cancel()
             job = Job()
             CoroutineScope((job ?: Job())).launch {

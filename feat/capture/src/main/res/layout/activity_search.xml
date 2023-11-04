@@ -18,7 +18,8 @@
             android:id="@+id/btn_back"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_margin="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
             android:padding="4dp"
             android:src="@drawable/backbtn"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,30 +27,61 @@
             app:tint="@color/text_gray"
             tools:ignore="UseAppTint" />
 
-        <EditText
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_search"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@null"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingHorizontal="12dp"
-            android:text="@={vm.textField}"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="20dp"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="@id/btn_back"
-            app:layout_constraintEnd_toStartOf="@id/btn_search"
-            app:layout_constraintStart_toEndOf="@id/btn_back"
-            app:layout_constraintTop_toTopOf="@id/btn_back" />
-
-        <ImageView
-            android:onClick="@{() -> vm.removeText()}"
-            android:id="@+id/btn_search"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_margin="12dp"
-            android:src="@drawable/baseline_clear_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/text_gray" />
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="@id/btn_back"
+            app:strokeColor="@color/main_blue"
+            app:strokeWidth="1dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_margin="6dp"
+                    android:src="@drawable/ic_search"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/main_blue" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="식품 이름을 입력해보세요."
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="@={vm.textField}" />
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_margin="6dp"
+                    android:onClick="@{() -> vm.removeText()}"
+                    android:src="@drawable/baseline_clear_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/text_gray" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
 
         <View
             android:id="@+id/search_underline"
@@ -59,7 +91,7 @@
             android:background="@color/light_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_search" />
+            app:layout_constraintTop_toBottomOf="@id/cv_search" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_foodlist"
@@ -69,6 +101,38 @@
             app:layout_constraintBottom_toTopOf="@id/tv_progress"
             app:layout_constraintTop_toBottomOf="@id/search_underline"
             tools:listitem="@layout/item_searched_food" />
+
+        <LinearLayout
+            android:id="@+id/ll_search_noti_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/tv_progress"
+            app:layout_constraintTop_toBottomOf="@id/search_underline">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/btn_search"
+                android:tint="@color/main_blue" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:text="식품을 검색해주세요."
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="영양성분표를 등록할 식품을 적어주세요"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <View
             android:layout_width="0dp"

@@ -3,6 +3,7 @@ package com.konkuk.capture.ui.capture
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,7 +14,9 @@ import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import com.konkuk.capture.databinding.ActivityCaptureBinding
 import com.konkuk.capture.ui.enroll.EnrollTextInput
+import com.konkuk.capture.ui.enroll.EnrollTextInputViewModel.Companion.BITMAP_PICTURE_KEY
 import com.konkuk.capture.ui.enroll.EnrollTextInputViewModel.Companion.OCR_RESULT_KEY
+import com.konkuk.capture.ui.enroll.EnrollTextInputViewModel.Companion.URI_PICTURE_KEY
 
 class CaptureActivity : AppCompatActivity() {
 
@@ -22,11 +25,15 @@ class CaptureActivity : AppCompatActivity() {
     private val recognizer =
         TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
 
+    private var bitmapPicture: Bitmap? = null
+    private var uriPicture: Uri? = null
+
     private val takePictureLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult(),
     ) {
         if (it.resultCode == RESULT_OK) {
             (it.data?.extras?.get("data") as Bitmap?)?.let { bitmap ->
+                bitmapPicture = bitmap
                 binding.ivNutritionInfo.setImageBitmap(bitmap)
                 processImageRecognize(InputImage.fromBitmap(bitmap, 0))
             } ?: reCapture()
@@ -40,6 +47,7 @@ class CaptureActivity : AppCompatActivity() {
     ) {
         if (it.resultCode == RESULT_OK) {
             it.data?.data?.let { uri ->
+                uriPicture = uri
                 binding.ivNutritionInfo.setImageURI(uri)
                 processImageRecognize(InputImage.fromFilePath(this@CaptureActivity, uri))
             } ?: reCapture()
@@ -69,6 +77,11 @@ class CaptureActivity : AppCompatActivity() {
             reCapture()
         })
         captureDialog.show(supportFragmentManager, "CaptureDialogFragment")
+
+        binding.llBackBtn.setOnClickListener {
+            finish()
+            startActivity(Intent(this@CaptureActivity, EnrollTextInput::class.java))
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -88,10 +101,9 @@ class CaptureActivity : AppCompatActivity() {
             finish()
             startActivity(
                 Intent(this@CaptureActivity, EnrollTextInput::class.java).apply {
-                    putExtra(
-                        OCR_RESULT_KEY,
-                        visionText.text,
-                    )
+                    putExtra(OCR_RESULT_KEY, visionText.text)
+                    putExtra(BITMAP_PICTURE_KEY, bitmapPicture)
+                    putExtra(URI_PICTURE_KEY, uriPicture)
                 },
             )
         }
