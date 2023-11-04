@@ -44,7 +44,11 @@ class StatisticViewModel @Inject constructor(
     val dataList = MutableStateFlow<List<StaticsItemModel>>(emptyList())
 
     init {
-        initMyStat(savedStateHandle.get<Int>(SELECTED_DAY_KEY)!!)
+        initMyStat(
+            savedStateHandle.get<Int>(SELECTED_YEAR_KEY)!!,
+            savedStateHandle.get<Int>(SELECTED_MONTH_KEY)!!,
+            savedStateHandle.get<Int>(SELECTED_DAY_KEY)!!,
+        )
         initAvgStat()
         initDateList()
 
@@ -139,11 +143,11 @@ class StatisticViewModel @Inject constructor(
         }
     }
 
-    private fun initMyStat(selectedDay: Int?) {
+    private fun initMyStat(year: Int, month: Int, selectedDay: Int) {
         date.value = "${getMonthUseCase()}월 ${selectedDay}일의 분석"
         viewModelScope.launch {
             val historyList =
-                getHistoryListUseCase(requireNotNull(selectedDay)).getOrNull()?.first()
+                getHistoryListUseCase(year, month, selectedDay).getOrNull()?.first()
             if (historyList?.size == 0) return@launch
             nutList.value = historyList!!.reduce { item, sum ->
                 HistoryItemModel(
@@ -163,6 +167,8 @@ class StatisticViewModel @Inject constructor(
 
     companion object {
         const val SELECTED_DAY_KEY = "SELECTED_DAY_KEY"
+        const val SELECTED_MONTH_KEY = "SELECTED_MONTH_KEY"
+        const val SELECTED_YEAR_KEY = "SELECTED_YEAR_KEY"
     }
 }
 
