@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.konkuk.common.R
+import com.konkuk.common.data.UserRepository
 import com.konkuk.history.data.datasource.statistic.NutritionStat
 import com.konkuk.history.data.datasource.statistic.StatCSVParser
 import com.konkuk.history.domain.model.HistoryItemModel
@@ -22,6 +23,7 @@ class StatisticViewModel @Inject constructor(
     private val getHistoryListUseCase: GetHistoryListUseCase,
     private val getMonthUseCase: GetMonthUseCase,
     private val parser: StatCSVParser,
+    private val userRepository: UserRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val statList = MutableStateFlow(NutritionStat(0, 0, 0, 0, 0, 0))
@@ -33,10 +35,10 @@ class StatisticViewModel @Inject constructor(
 
     val date = MutableStateFlow("-월 -일의 분석")
 
-    private val _gender = MutableStateFlow(GENDER.MALE)
+    private val _gender = MutableStateFlow(GENDER.NONE)
     val gender get() = _gender.asStateFlow()
 
-    private val _age = MutableStateFlow(18)
+    private val _age = MutableStateFlow(0)
     val age get() = _age.asStateFlow()
 
     val dataList = MutableStateFlow<List<StaticsItemModel>>(emptyList())
@@ -45,6 +47,12 @@ class StatisticViewModel @Inject constructor(
         initMyStat(savedStateHandle.get<Int>(SELECTED_DAY_KEY)!!)
         initAvgStat()
         initDateList()
+
+        viewModelScope.launch {
+            _gender.value =
+                if (userRepository.genderFlow.first() == true) GENDER.MALE else GENDER.FEMALE
+            _age.value = userRepository.ageFlow.first()?.let { it } ?: 23
+        }
     }
 
     private fun initDateList() {
@@ -153,19 +161,11 @@ class StatisticViewModel @Inject constructor(
         }
     }
 
-    fun changeAge(age: Int) {
-        if (age > 0) _age.value = age
-    }
-
-    fun changeGender() {
-        _gender.value = if (gender.value == GENDER.MALE) GENDER.FEMALE else GENDER.MALE
-    }
-
     companion object {
         const val SELECTED_DAY_KEY = "SELECTED_DAY_KEY"
     }
 }
 
 enum class GENDER {
-    MALE, FEMALE
+    MALE, FEMALE, NONE
 }

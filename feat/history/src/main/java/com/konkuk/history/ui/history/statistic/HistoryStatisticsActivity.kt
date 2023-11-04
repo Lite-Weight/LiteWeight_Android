@@ -2,11 +2,9 @@ package com.konkuk.history.ui.history.statistic
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.konkuk.history.databinding.ActivityHistoryStatisticsBinding
-import com.konkuk.history.databinding.DialogAgeInputBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -44,29 +42,5 @@ class HistoryStatisticsActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
-
-        btnAge.setOnClickListener {
-            selectAge()
-        }
-    }
-
-    private fun selectAge() {
-        val dialogBinding = DialogAgeInputBinding.inflate(layoutInflater)
-
-        AlertDialog.Builder(this@HistoryStatisticsActivity)
-            .setView(
-                dialogBinding.root,
-            )
-            .setPositiveButton(
-                "확인",
-            ) { dialog, _ ->
-                val age = dialogBinding.etAge.text.toString().toIntOrNull() ?: 0
-                if (age > 0) viewModel.changeAge(age)
-                dialog.dismiss()
-            }
-            .setNegativeButton(
-                "취소",
-            ) { dialog, _ -> dialog.dismiss() }
-            .show()
     }
 }

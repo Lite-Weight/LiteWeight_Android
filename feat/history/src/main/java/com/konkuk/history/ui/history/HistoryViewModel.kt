@@ -56,7 +56,7 @@ class HistoryViewModel @Inject constructor(
         return calendarList
     }
 
-    private fun initFoodHistory() {
+    private fun initFoodHistory() { // 여기서 데이터 바꿔줘야함
         getHistoryDateUseCase().onSuccess { value ->
             viewModelScope.launch {
                 val today = value.first()
