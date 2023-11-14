@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.konkuk.autotextcorrection.AutoTextCorrector
 import com.konkuk.common.data.FoodInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,15 +14,15 @@ import javax.inject.Inject
 class EnrollTextInputViewModel @Inject constructor(
     savesStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    private val sodiumRegex = Regex("나트[륨룸]([\\d.]+)\\D")
+    private val sodiumRegex = Regex("나트륨([\\d.]+)\\D")
     private val carbohydratesRegex = Regex("탄수화물([\\d.]+)\\D")
     private val fatRegex = Regex("지방([\\d.]+)\\D")
-    private val cholesterolRegex = Regex("콜[레래러]스[태테]롤([\\d.]+)\\D")
+    private val cholesterolRegex = Regex("콜레스테롤([\\d.]+)\\D")
     private val proteinRegex = Regex("단백질([\\d.]+)\\D")
     private val sugarRegex = Regex("당[류루]([\\d.]+)\\D")
-    private val transFatRegex = Regex("트[랜렌]스지방([\\d.]+)\\D")
+    private val transFatRegex = Regex("트랜스지방([\\d.]+)\\D")
     private val saturatedFatRegex = Regex("포화지방([\\d.]+)\\D")
-    private val totalGramsRegex = Regex("총내용[량랑](\\d+)g")
+    private val totalGramsRegex = Regex("총내용량(\\d+)g")
     private val totalCaloriesRegex = Regex("(\\d+)kca")
     private val perCaloriesRegex = Regex("(\\d+)g당(\\d+)kca")
 
@@ -40,11 +41,14 @@ class EnrollTextInputViewModel @Inject constructor(
 
     init {
         savesStateHandle.get<String>(OCR_RESULT_KEY)?.let { text ->
-            val result = text.replace(" ", "")
-                .replace(",", ".")
-                .replace(")", "")
+            val correctedText =
+                AutoTextCorrector(nutritionNameList, 2).correctText(text.replace("%", "% "))
 
-            setFoodInfo(result)
+            setFoodInfo(
+                correctedText.replace(" ", "")
+                    .replace(",", ".")
+                    .replace(")", ""),
+            )
         }
         savesStateHandle.get<FoodInfo?>(API_RESULT_KEY)?.let {
             setFoodInfo(it)
@@ -123,6 +127,18 @@ class EnrollTextInputViewModel @Inject constructor(
         const val API_RESULT_KEY = "API_RESULT_KEY"
         const val BITMAP_PICTURE_KEY = "BITMAP_PICTURE_KEY"
         const val URI_PICTURE_KEY = "URI_PICTURE_KEY"
+
+        val nutritionNameList = listOf(
+            "칼로리",
+            "탄수화물",
+            "단백질",
+            "당류",
+            "지방",
+            "포화지빙",
+            "트랜스지방",
+            "콜레스테롤",
+            "나트륨",
+        )
     }
 }
 
