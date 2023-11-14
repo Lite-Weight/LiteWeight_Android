@@ -46,6 +46,7 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":autotextcorrection"))
 
     // Android
     implementation(AndroidX.CORE_KTX)
