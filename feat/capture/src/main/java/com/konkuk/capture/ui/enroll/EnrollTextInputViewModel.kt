@@ -14,15 +14,15 @@ import javax.inject.Inject
 class EnrollTextInputViewModel @Inject constructor(
     savesStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    private val sodiumRegex = Regex("나트[륨룸]([\\d.]+)\\D")
+    private val sodiumRegex = Regex("나트륨([\\d.]+)\\D")
     private val carbohydratesRegex = Regex("탄수화물([\\d.]+)\\D")
     private val fatRegex = Regex("지방([\\d.]+)\\D")
-    private val cholesterolRegex = Regex("콜[레래러]스[태테]롤([\\d.]+)\\D")
+    private val cholesterolRegex = Regex("콜레스테롤([\\d.]+)\\D")
     private val proteinRegex = Regex("단백질([\\d.]+)\\D")
     private val sugarRegex = Regex("당[류루]([\\d.]+)\\D")
-    private val transFatRegex = Regex("트[랜렌]스지방([\\d.]+)\\D")
+    private val transFatRegex = Regex("트랜스지방([\\d.]+)\\D")
     private val saturatedFatRegex = Regex("포화지방([\\d.]+)\\D")
-    private val totalGramsRegex = Regex("총내용[량랑](\\d+)g")
+    private val totalGramsRegex = Regex("총내용량(\\d+)g")
     private val totalCaloriesRegex = Regex("(\\d+)kca")
     private val perCaloriesRegex = Regex("(\\d+)g당(\\d+)kca")
 
@@ -136,7 +136,7 @@ class EnrollTextInputViewModel @Inject constructor(
             "지방",
             "포화지빙",
             "트랜스지방",
-            "콜레스트롤",
+            "콜레스테롤",
             "나트륨",
         )
     }
