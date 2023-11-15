@@ -4,7 +4,8 @@
     <application>
         <activity
             android:name=".ui.history.statistic.HistoryStatisticsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.LiteWeight_Android.NoActionBar" />
     </application>
 
 </manifest>
