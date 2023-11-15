@@ -39,8 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_back"
             app:layout_constraintTop_toTopOf="@id/btn_back"
-            app:strokeColor="@color/main_blue"
-            app:strokeWidth="1dp">
+            app:strokeColor="@color/main_blue">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -86,9 +85,9 @@
         <View
             android:id="@+id/search_underline"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_marginTop="8dp"
-            android:background="@color/light_blue"
+            android:background="@color/main_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_search" />
