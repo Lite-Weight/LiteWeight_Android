@@ -1,6 +1,7 @@
 package com.konkuk.capture.ui.capture
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -17,6 +18,8 @@ import com.konkuk.capture.ui.enroll.EnrollTextInput
 import com.konkuk.capture.ui.enroll.EnrollTextInputViewModel.Companion.BITMAP_PICTURE_KEY
 import com.konkuk.capture.ui.enroll.EnrollTextInputViewModel.Companion.OCR_RESULT_KEY
 import com.konkuk.capture.ui.enroll.EnrollTextInputViewModel.Companion.URI_PICTURE_KEY
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class CaptureActivity : AppCompatActivity() {
 
@@ -29,17 +32,28 @@ class CaptureActivity : AppCompatActivity() {
     private var uriPicture: Uri? = null
 
     private val takePictureLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult(),
-    ) {
-        if (it.resultCode == RESULT_OK) {
-            (it.data?.extras?.get("data") as Bitmap?)?.let { bitmap ->
-                bitmapPicture = bitmap
-                binding.ivNutritionInfo.setImageBitmap(bitmap)
-                processImageRecognize(InputImage.fromBitmap(bitmap, 0))
-            } ?: reCapture()
-        } else {
-            reCapture()
+        ActivityResultContracts.TakePicture(),
+    ) { isSuccess ->
+        if (isSuccess) {
+            binding.ivNutritionInfo.setImageURI(uriPicture)
+            uriPicture?.let { uri ->
+                processImageRecognize(
+                    InputImage.fromFilePath(
+                        this@CaptureActivity,
+                        uri,
+                    ),
+                )
+            }
         }
+    }
+
+    private fun createImageFile(): Uri? {
+        val now = SimpleDateFormat("yyMMdd_HHmmss").format(Date())
+        val content = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, "img_$now.jpg")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
+        }
+        return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, content)
     }
 
     private val getPictureLauncher = registerForActivityResult(
@@ -70,7 +84,8 @@ class CaptureActivity : AppCompatActivity() {
         val getPictureIntent = Intent(Intent.ACTION_GET_CONTENT).apply { type = "image/*" }
 
         captureDialog = CaptureDialogFragment({
-            takePictureLauncher.launch(takePictureIntent)
+            uriPicture = createImageFile()
+            uriPicture?.let { uri -> takePictureLauncher.launch(uri) }
         }, {
             getPictureLauncher.launch(getPictureIntent)
         }, {
